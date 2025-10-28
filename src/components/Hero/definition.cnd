@@ -1,0 +1,5 @@
+[ jempnt:hero ] > jnt:content, jempmix:component, seumix:linkTo
+ - jcr:title (string) i18n
+ - jemp:subtitle (string) i18n
+ - jemp:ctaLabel (string) i18n
+ - jemp:backgroundImage (weakreference, picker[type='image']) < 'jmix:image'

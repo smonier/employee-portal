@@ -73,3 +73,15 @@ export const buildQuery = ({
   );
   return { jcrQuery, warn };
 };
+
+const CONTENT_TYPE_LABELS: Record<string, string> = {
+  "jempnt:newsArticle": "News Articles",
+  "jempnt:eventCard": "Events",
+  "jempnt:policyDetail": "Policies",
+  "jempnt:knowledgeBaseArticle": "Knowledge Base Articles",
+  "jempnt:alertsBanner": "Alerts",
+  "jempnt:quickLinks": "Quick Links",
+};
+
+export const getContentTypeLabel = (type: string): string =>
+  CONTENT_TYPE_LABELS[type] || type;

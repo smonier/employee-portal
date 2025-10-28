@@ -15,7 +15,7 @@
 }
 
 .infoPanel {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #33b6ea 0%, #00a0e3 55%, #006fb4 100%);
   color: white;
   padding: 1.25rem;
   border-radius: 8px;

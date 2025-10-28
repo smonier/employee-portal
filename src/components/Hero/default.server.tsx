@@ -1,0 +1,107 @@
+import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
+import { t } from "i18next";
+import type { CSSProperties } from "react";
+import type { JCRNodeWrapper } from "org.jahia.services.content";
+import type { HeroProps } from "./types.js";
+import classes from "./component.module.css";
+
+const resolveImageUrl = (image?: HeroProps["jemp:backgroundImage"]) => {
+  if (!image) return null;
+  if (typeof image === "string") return image;
+  if (typeof image === "object" && "getPath" in image && typeof image.getPath === "function") {
+    return `/files/default${(image as JCRNodeWrapper).getPath()}`;
+  }
+  return null;
+};
+
+const resolveLink = (props: HeroProps) => {
+  const directUrl = typeof props["jemp:url"] === "string" ? props["jemp:url"] : null;
+  const { "seu:linkType": linkType, "seu:externalLink": external, "seu:internalLink": internal } = props;
+
+  if (linkType === "externalLink" && typeof external === "string") {
+    return external;
+  }
+
+  if (linkType === "internalLink" && internal) {
+    if (typeof internal === "string") {
+      return internal;
+    }
+    if (typeof internal === "object" && "getPath" in internal && typeof internal.getPath === "function") {
+      return buildNodeUrl(internal as JCRNodeWrapper);
+    }
+  }
+
+  const legacyInternal = props["seu:internalLink"];
+  if (!linkType && legacyInternal) {
+    if (typeof legacyInternal === "string") {
+      return legacyInternal;
+    }
+    if (typeof legacyInternal === "object" && "getPath" in legacyInternal) {
+      return buildNodeUrl(legacyInternal as JCRNodeWrapper);
+    }
+  }
+
+  const legacyExternal = props["seu:externalLink"];
+  if (!linkType && typeof legacyExternal === "string") {
+    return legacyExternal;
+  }
+
+  return directUrl;
+};
+
+jahiaComponent(
+  {
+    componentType: "view",
+    nodeType: "jempnt:hero",
+    name: "default",
+    displayName: "Hero Banner",
+  },
+  (props: HeroProps) => {
+    const title = props["jcr:title"];
+    const subtitle = props["jemp:subtitle"];
+    const ctaLabelRaw = typeof props["jemp:ctaLabel"] === "string" ? props["jemp:ctaLabel"].trim() : "";
+    const hasCtaLabel = Boolean(ctaLabelRaw);
+    const backgroundUrl = resolveImageUrl(props["jemp:backgroundImage"]);
+    const href = resolveLink(props);
+    const hasLink = Boolean(href);
+    const linkTarget = props["seu:linkTarget"] && props["seu:linkTarget"] !== "_self" ? props["seu:linkTarget"] : undefined;
+    const rel = linkTarget === "_blank" ? "noopener noreferrer" : undefined;
+
+    const style: CSSProperties | undefined = backgroundUrl
+      ? {
+          backgroundImage: `url(${backgroundUrl})`,
+        }
+      : undefined;
+
+    return (
+      <section className={classes.root} style={style}>
+        <div className={classes.content}>
+          <span className={classes.eyebrow}>
+            <span aria-hidden="true" />
+          </span>
+          <h2 className={classes.title}>{title}</h2>
+          {subtitle && <p className={classes.subtitle}>{subtitle}</p>}
+          <div className={classes.ctaRow}>
+            {hasLink && hasCtaLabel ? (
+              <a className={classes.cta} href={href ?? "#"} target={linkTarget} rel={rel}>
+                {ctaLabelRaw}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </a>
+            ) : hasLink ? (
+              <span className={classes.fallbackNote}>
+                {t("jempnt_hero.noLabel", "Add a label to display the call-to-action.")}
+              </span>
+            ) : (
+              <span className={classes.fallbackNote}>
+                {t("jempnt_hero.noLink", "Add a link to enable the call-to-action.")}
+              </span>
+            )}
+          </div>
+        </div>
+      </section>
+    );
+  },
+);

@@ -1,6 +1,5 @@
 .nav {
-  background: #1b1a4e;
-  background: var(--luxe-color-darkBlue, #1b1a4e);
+  background: linear-gradient(to bottom, #024, #000);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;

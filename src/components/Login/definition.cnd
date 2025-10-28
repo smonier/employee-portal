@@ -1,0 +1,2 @@
+[ jempnt:login ] > jnt:content, jempmix:component, mix:title
+ - j:displayRememberMeButton (boolean) = true autocreated

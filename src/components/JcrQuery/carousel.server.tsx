@@ -11,21 +11,8 @@ import type { RenderContext } from "org.jahia.services.render";
 import classes from "./carousel.module.css";
 import alert from "~/templates/css/alert.module.css";
 import { t } from "i18next";
-import { buildQuery } from "./utils";
+import { buildQuery, getContentTypeLabel } from "./utils";
 import type { JcrQueryProps } from "./types";
-
-// Helper function to get user-friendly content type label
-const getContentTypeLabel = (type: string): string => {
-  const typeMap: Record<string, string> = {
-    "jempnt:newsArticle": "News Articles",
-    "jempnt:eventCard": "Events",
-    "jempnt:policyDetail": "Policies",
-    "jempnt:knowledgeBaseArticle": "Knowledge Base Articles",
-    "jempnt:alertsBanner": "Alerts",
-    "jempnt:quickLinks": "Quick Links",
-  };
-  return typeMap[type] || type;
-};
 
 jahiaComponent(
   {
