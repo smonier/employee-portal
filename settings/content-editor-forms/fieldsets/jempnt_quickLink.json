@@ -1,0 +1,23 @@
+{
+  "name": "jempnt:quickLink",
+  "description": "Quick Link component",
+  "dynamic": false,
+
+  "fields": [
+    {
+      "name": "jemp:icon",
+      "selectorType": "Choicelist",
+      "selectorOptionsMap": {
+        "allowCustomEntry": "false"
+      },
+      "valueConstraints": [
+        { "displayValue": "💰 Payslips", "value": { "type": "String", "value": "payslips" } },
+        { "displayValue": "🏖️ Time Off", "value": { "type": "String", "value": "timeOff" } },
+        { "displayValue": "🖥️ IT Tickets", "value": { "type": "String", "value": "itTickets" } },
+        { "displayValue": "🎓 Learning", "value": { "type": "String", "value": "learning" } },
+        { "displayValue": "🧾 Expenses", "value": { "type": "String", "value": "expenses" } },
+        { "displayValue": "📅 Events", "value": { "type": "String", "value": "events" } }
+      ]
+    }
+  ]
+}

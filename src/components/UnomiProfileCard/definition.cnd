@@ -1,0 +1,2 @@
+[jempnt:unomiProfileCard] > jnt:content, jmix:droppableContent, jempmix:component
+ - jcr:title (string) i18n

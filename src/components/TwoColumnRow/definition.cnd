@@ -1,0 +1,5 @@
+[jempnt:twoColumnRow] > jnt:content, jmix:droppableContent, jempmix:component
+ - leftColumnTitle (string) i18n
+ - rightColumnTitle (string) i18n
+ + leftColumn (jnt:contentList) = jnt:contentList autocreated
+ + rightColumn (jnt:contentList) = jnt:contentList autocreated

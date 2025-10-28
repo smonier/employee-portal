@@ -1,0 +1,74 @@
+.banner {
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  margin: 0;
+  font-weight: 500;
+  border-left: 4px solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 60px;
+  position: relative;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.message {
+  flex: 1;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  opacity: 0.7;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.closeButton:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.closeButton:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.banner--info {
+  background: #e8f1ff;
+  color: #0b3d91;
+  border-left-color: #0b3d91;
+}
+
+.banner--warning {
+  background: #fff6e5;
+  color: #9a5b00;
+  border-left-color: #f39c12;
+}
+
+.banner--error {
+  background: #ffeaea;
+  color: #8a0000;
+  border-left-color: #e74c3c;
+}
+
+.banner--success {
+  background: #e8ffef;
+  color: #0c6b2a;
+  border-left-color: #27ae60;
+}

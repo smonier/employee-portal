@@ -1,0 +1,31 @@
+.article {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.problem {
+  margin: 0;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.meta {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.steps {
+  display: grid;
+  gap: 0.75rem;
+  line-height: 1.6;
+  color: #1f2933;
+}

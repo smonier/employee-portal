@@ -1,0 +1,100 @@
+.policy {
+  border-left: 4px solid #2563eb;
+  padding: 1.25rem;
+  background: #f8fafc;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.meta {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.description {
+  margin: 0;
+  color: #1f2933;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.policyCard {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--jemp-surface, #ffffff);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.policyCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+}
+
+.policyCardContent {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+
+.policyCardTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.policyCardMeta {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 0.9rem;
+}
+
+.policyCardLabel {
+  color: #64748b;
+  font-style: italic;
+}
+
+.policyCardValue {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.policyCardExcerpt {
+  margin: 0;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.policyCardActions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.policyCardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  background: rgba(37, 99, 235, 0.08);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.policyCardLink:hover {
+  background: rgba(37, 99, 235, 0.16);
+}

@@ -1,0 +1,3 @@
+[ jempnt:kbList ] > jnt:content, jempmix:component
+ - jcr:title (string) i18n
+ - jemp:limit (long) = 5 autocreated

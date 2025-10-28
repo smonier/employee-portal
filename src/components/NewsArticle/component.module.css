@@ -1,0 +1,31 @@
+.article {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.hero {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.summary {
+  margin: 0;
+  color: #4b5563;
+  font-size: 1rem;
+}
+
+.body {
+  display: grid;
+  gap: 1rem;
+  color: #1f2933;
+  font-size: 1rem;
+  line-height: 1.6;
+}

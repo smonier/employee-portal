@@ -1,0 +1,233 @@
+.root {
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--luxe-color-darkBlue, #1a1a2e);
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: #f8f9fa;
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.carouselSlide {
+  min-width: 100%;
+  flex-shrink: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Navigation Buttons */
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.carouselButton:hover {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carouselButton:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carouselButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.carouselButtonPrev {
+  left: 1rem;
+}
+
+.carouselButtonNext {
+  right: 1rem;
+}
+
+/* Indicators */
+.carouselIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.indicator {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: none;
+  background: #d1d5db;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.indicator:hover {
+  background: #9ca3af;
+  transform: scale(1.2);
+}
+
+.indicator[data-active="true"] {
+  background: var(--luxe-color-purple, #667eea);
+  width: 2rem;
+  border-radius: 0.375rem;
+}
+
+.noResults {
+  padding: 3rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.125rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  border: 2px dashed #d1d5db;
+}
+
+/* Edit Mode Grid */
+.editModeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.editModeCard {
+  min-height: 200px;
+}
+
+.remainingCard {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 0.5rem;
+  color: white;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.remainingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.remainingCount {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.remainingText {
+  font-size: 1.125rem;
+  opacity: 0.9;
+}
+
+/* Info Panel */
+.infoPanel {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.infoPanelTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+
+.infoPanelContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.infoPanelItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.infoPanelLabel {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.infoPanelValue {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carouselButton {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .carouselButton svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .carouselButtonPrev {
+    left: 0.5rem;
+  }
+
+  .carouselButtonNext {
+    right: 0.5rem;
+  }
+
+  .carouselSlide {
+    padding: 0.5rem;
+  }
+}

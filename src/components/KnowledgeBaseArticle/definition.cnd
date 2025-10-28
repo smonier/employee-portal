@@ -1,0 +1,6 @@
+[ jempnt:kbArticle ] > jnt:content, jmix:editorialContent, jmix:mainResource, jempmix:component, jempmix:queryContent
+ - jcr:title (string) i18n
+ - jemp:problem (string) i18n
+ - jemp:steps (string, richtext) i18n
+ - jemp:platform (string)
+ - jemp:lastReviewed (date)

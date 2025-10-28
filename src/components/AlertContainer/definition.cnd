@@ -1,0 +1,2 @@
+[ jempnt:alertContainer ] > jnt:content, jmix:list, jmix:editorialContent, jempmix:component
++ * (jempnt:alertBanner) = jempnt:alertBanner

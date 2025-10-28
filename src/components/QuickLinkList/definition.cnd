@@ -1,0 +1,3 @@
+[ jempnt:quickLinkList ] > jnt:content, jempmix:component
+ - jcr:title (string) i18n
+ + * (jempnt:quickLink) = jempnt:quickLink

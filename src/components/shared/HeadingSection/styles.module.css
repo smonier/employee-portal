@@ -1,0 +1,19 @@
+.main {
+  padding-bottom: 1.5rem;
+}
+
+.title {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.title::first-letter {
+  text-transform: uppercase;
+}
+
+.title::after {
+  content: "✦";
+  color: var(--luxe-color-primary);
+  font-size: 0.4em;
+  margin-left: 4px;
+}

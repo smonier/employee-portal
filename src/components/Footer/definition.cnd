@@ -1,0 +1,3 @@
+[jempnt:footer] > jnt:content, jempmix:component orderable
+ - notice (string) = '' i18n autocreated
+ + * (jmix:link)

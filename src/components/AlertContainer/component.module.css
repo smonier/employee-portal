@@ -1,0 +1,163 @@
+.alertContainer {
+  position: relative;
+  width: 100%;
+}
+
+.carousel {
+  transition: transform 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure each alert has fixed height in view mode */
+.alertContainer.viewMode .carousel > div {
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* Edit Mode: Show all alerts in a list */
+
+.alertContainer.editMode {
+  overflow: visible;
+  max-height: none;
+}
+
+.alertContainer.editMode .carousel > div {
+  margin-bottom: 0.5rem;
+  height: auto;
+  min-height: auto;
+  max-height: none;
+}
+
+.alertContainer.editMode .carousel > div:last-child {
+  margin-bottom: 0;
+}
+
+/* View Mode: Carousel with overflow hidden */
+.alertContainer.viewMode {
+  overflow: hidden;
+  max-height: 60px; /* Height of one banner */
+}
+
+/* Animation for vertical carousel - use pixel values */
+@keyframes slideVertical3 {
+  0%,
+  30% {
+    transform: translateY(0);
+  }
+  33%,
+  63% {
+    transform: translateY(-60px);
+  }
+  66%,
+  96% {
+    transform: translateY(-120px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideVertical4 {
+  0%,
+  22% {
+    transform: translateY(0);
+  }
+  25%,
+  47% {
+    transform: translateY(-60px);
+  }
+  50%,
+  72% {
+    transform: translateY(-120px);
+  }
+  75%,
+  97% {
+    transform: translateY(-180px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideVertical5 {
+  0%,
+  18% {
+    transform: translateY(0);
+  }
+  20%,
+  38% {
+    transform: translateY(-60px);
+  }
+  40%,
+  58% {
+    transform: translateY(-120px);
+  }
+  60%,
+  78% {
+    transform: translateY(-180px);
+  }
+  80%,
+  98% {
+    transform: translateY(-240px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation based on number of alerts */
+/* Exactly 2 alerts */
+.alertContainer.viewMode:has(.carousel > div:nth-child(2)):not(:has(.carousel > div:nth-child(3)))
+  .carousel {
+  animation: slideVerticalTwo 8s ease-in-out infinite;
+}
+
+/* Exactly 3 alerts */
+.alertContainer.viewMode:has(.carousel > div:nth-child(3)):not(:has(.carousel > div:nth-child(4)))
+  .carousel {
+  animation: slideVertical3 12s ease-in-out infinite;
+}
+
+/* Exactly 4 alerts */
+.alertContainer.viewMode:has(.carousel > div:nth-child(4)):not(:has(.carousel > div:nth-child(5)))
+  .carousel {
+  animation: slideVertical4 16s ease-in-out infinite;
+}
+
+/* 5 or more alerts */
+.alertContainer.viewMode:has(.carousel > div:nth-child(5)) .carousel {
+  animation: slideVertical5 20s ease-in-out infinite;
+}
+
+/* Adjust animation for exactly 2 alerts */
+@keyframes slideVerticalTwo {
+  0%,
+  45% {
+    transform: translateY(0);
+  }
+  50%,
+  95% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.alertContainer.viewMode:has(.carousel > div:nth-child(2)):not(:has(.carousel > div:nth-child(3)))
+  .carousel {
+  animation: slideVerticalTwo 8s ease-in-out infinite;
+}
+
+.alertContainer.viewMode .carousel.preview,
+.alertContainer.viewMode .carousel.live {
+  animation-play-state: running;
+}
+
+.alertContainer.editMode .carousel {
+  animation: none;
+}
