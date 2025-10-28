@@ -1,0 +1,810 @@
+{
+  "employees": [
+    {
+      "name": "Pam",
+      "department": "Finance",
+      "payslips": [
+        {
+          "date": "2025-09-29",
+          "grossSalary": 4412.77,
+          "netSalary": 3475.38,
+          "bonuses": null,
+          "deductions": 236.27,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-08-29",
+          "grossSalary": 4769.78,
+          "netSalary": 3668.59,
+          "bonuses": null,
+          "deductions": 131.63,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-07-29",
+          "grossSalary": 4640.17,
+          "netSalary": 3687.03,
+          "bonuses": null,
+          "deductions": 222.77,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-06-29",
+          "grossSalary": 5065.9,
+          "netSalary": 3991.4,
+          "bonuses": null,
+          "deductions": 198.4,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-05-29",
+          "grossSalary": 4593.85,
+          "netSalary": 3464.1,
+          "bonuses": null,
+          "deductions": 104.86,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-04-29",
+          "grossSalary": 4294.69,
+          "netSalary": 3404.22,
+          "bonuses": null,
+          "deductions": 140.46,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-03-29",
+          "grossSalary": 4246.34,
+          "netSalary": 3355.49,
+          "bonuses": null,
+          "deductions": 200.17,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-03-01",
+          "grossSalary": 4895.78,
+          "netSalary": 3721.02,
+          "bonuses": null,
+          "deductions": 151.83,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2025-01-29",
+          "grossSalary": 4858.39,
+          "netSalary": 3670.4,
+          "bonuses": null,
+          "deductions": 193.19,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2024-12-29",
+          "grossSalary": 4267.38,
+          "netSalary": 3413.68,
+          "bonuses": null,
+          "deductions": 169.96,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2024-11-29",
+          "grossSalary": 5036.63,
+          "netSalary": 3878,
+          "bonuses": null,
+          "deductions": 158.63,
+          "currency": "EUR",
+          "department": "Finance"
+        },
+        {
+          "date": "2024-10-29",
+          "grossSalary": 4470.04,
+          "netSalary": 3516.21,
+          "bonuses": 250.64,
+          "deductions": 101.53,
+          "currency": "EUR",
+          "department": "Finance"
+        }
+      ],
+      "vacations": {
+        "totalDaysAvailable": 28,
+        "totalDaysTaken": 9,
+        "remainingDays": 19,
+        "vacationsTaken": [
+          {
+            "startDate": "2025-10-07",
+            "endDate": "2025-10-08",
+            "durationDays": 2,
+            "type": "Unpaid Leave"
+          },
+          {
+            "startDate": "2025-09-05",
+            "endDate": "2025-09-07",
+            "durationDays": 3,
+            "type": "RTT"
+          },
+          {
+            "startDate": "2025-08-17",
+            "endDate": "2025-08-18",
+            "durationDays": 2,
+            "type": "Paid Leave"
+          },
+          {
+            "startDate": "2025-07-10",
+            "endDate": "2025-07-11",
+            "durationDays": 2,
+            "type": "RTT"
+          }
+        ]
+      },
+      "expenses": {
+        "month": "2025-08-31",
+        "totalAmount": 181,
+        "categories": [
+          {
+            "name": "Travel",
+            "items": [
+              {
+                "date": "2025-09-01",
+                "description": "Train to Paris client meeting",
+                "amount": 78.6,
+                "paymentMethod": "Credit Card"
+              },
+              {
+                "date": "2025-09-07",
+                "description": "Taxi from station",
+                "amount": 24.8,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          },
+          {
+            "name": "Meals",
+            "items": [
+              {
+                "date": "2025-09-02",
+                "description": "Budget review lunch",
+                "amount": 36.2,
+                "paymentMethod": "Credit Card"
+              },
+              {
+                "date": "2025-09-08",
+                "description": "Coffee with auditors",
+                "amount": 12.5,
+                "paymentMethod": "Cash"
+              }
+            ]
+          },
+          {
+            "name": "Office Supplies",
+            "items": [
+              {
+                "date": "2025-09-02",
+                "description": "Calculator replacement",
+                "amount": 28.9,
+                "paymentMethod": "Reimbursement"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Penny",
+      "department": "People Operations",
+      "payslips": [
+        {
+          "date": "2025-09-29",
+          "grossSalary": 4284.12,
+          "netSalary": 3409.93,
+          "bonuses": 532.61,
+          "deductions": 115.85,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-08-29",
+          "grossSalary": 4693.49,
+          "netSalary": 3597.64,
+          "bonuses": null,
+          "deductions": 231.7,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-07-29",
+          "grossSalary": 4192.78,
+          "netSalary": 3230.33,
+          "bonuses": 693.01,
+          "deductions": 96.04,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-06-29",
+          "grossSalary": 4376.63,
+          "netSalary": 3478.68,
+          "bonuses": null,
+          "deductions": 164.47,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-05-29",
+          "grossSalary": 4443.99,
+          "netSalary": 3450.01,
+          "bonuses": null,
+          "deductions": 157.4,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-04-29",
+          "grossSalary": 3609.82,
+          "netSalary": 2716.1,
+          "bonuses": null,
+          "deductions": 161.02,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-03-29",
+          "grossSalary": 3933.28,
+          "netSalary": 3112.87,
+          "bonuses": null,
+          "deductions": 118.63,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-03-01",
+          "grossSalary": 4293.04,
+          "netSalary": 3328.86,
+          "bonuses": null,
+          "deductions": 203.62,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2025-01-29",
+          "grossSalary": 4639.97,
+          "netSalary": 3561.87,
+          "bonuses": null,
+          "deductions": 188.4,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2024-12-29",
+          "grossSalary": 4041.73,
+          "netSalary": 3066.21,
+          "bonuses": null,
+          "deductions": 173.86,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2024-11-29",
+          "grossSalary": 3811.3,
+          "netSalary": 2879.47,
+          "bonuses": null,
+          "deductions": 207.32,
+          "currency": "EUR",
+          "department": "People Operations"
+        },
+        {
+          "date": "2024-10-29",
+          "grossSalary": 3989.57,
+          "netSalary": 3063.97,
+          "bonuses": null,
+          "deductions": 218.73,
+          "currency": "EUR",
+          "department": "People Operations"
+        }
+      ],
+      "vacations": {
+        "totalDaysAvailable": 29,
+        "totalDaysTaken": 13,
+        "remainingDays": 16,
+        "vacationsTaken": [
+          {
+            "startDate": "2025-10-12",
+            "endDate": "2025-10-13",
+            "durationDays": 2,
+            "type": "Unpaid Leave"
+          },
+          {
+            "startDate": "2025-09-19",
+            "endDate": "2025-09-22",
+            "durationDays": 4,
+            "type": "Paid Leave"
+          },
+          {
+            "startDate": "2025-08-03",
+            "endDate": "2025-08-07",
+            "durationDays": 5,
+            "type": "Paid Leave"
+          },
+          {
+            "startDate": "2025-07-12",
+            "endDate": "2025-07-13",
+            "durationDays": 2,
+            "type": "Paid Leave"
+          }
+        ]
+      },
+      "expenses": {
+        "month": "2025-08-31",
+        "totalAmount": 265.4,
+        "categories": [
+          {
+            "name": "Travel",
+            "items": [
+              {
+                "date": "2025-09-01",
+                "description": "Flight to Lyon onboarding workshop",
+                "amount": 142.4,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          },
+          {
+            "name": "Meals",
+            "items": [
+              {
+                "date": "2025-09-03",
+                "description": "Onboarding dinner",
+                "amount": 58.7,
+                "paymentMethod": "Credit Card"
+              },
+              {
+                "date": "2025-09-08",
+                "description": "Recruiter breakfast",
+                "amount": 19.3,
+                "paymentMethod": "Cash"
+              }
+            ]
+          },
+          {
+            "name": "Training",
+            "items": [
+              {
+                "date": "2025-09-01",
+                "description": "HR compliance webinar",
+                "amount": 45,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Robin",
+      "department": "Digital Workplace",
+      "payslips": [
+        {
+          "date": "2025-09-29",
+          "grossSalary": 5387.73,
+          "netSalary": 4255,
+          "bonuses": 366.46,
+          "deductions": 143.7,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-08-29",
+          "grossSalary": 5381.74,
+          "netSalary": 4169.47,
+          "bonuses": 283.17,
+          "deductions": 123.12,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-07-29",
+          "grossSalary": 5148.92,
+          "netSalary": 3965.8,
+          "bonuses": null,
+          "deductions": 122.5,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-06-29",
+          "grossSalary": 4994.27,
+          "netSalary": 3978.07,
+          "bonuses": 304.11,
+          "deductions": 92.44,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-05-29",
+          "grossSalary": 5384.95,
+          "netSalary": 4048.02,
+          "bonuses": null,
+          "deductions": 114.62,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-04-29",
+          "grossSalary": 4661.43,
+          "netSalary": 3542.37,
+          "bonuses": 308.71,
+          "deductions": 122.28,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-03-29",
+          "grossSalary": 5325.47,
+          "netSalary": 4154.26,
+          "bonuses": null,
+          "deductions": 217.55,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-03-01",
+          "grossSalary": 4892.53,
+          "netSalary": 3820.51,
+          "bonuses": null,
+          "deductions": 114.82,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2025-01-29",
+          "grossSalary": 4647.05,
+          "netSalary": 3663.96,
+          "bonuses": null,
+          "deductions": 158.87,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2024-12-29",
+          "grossSalary": 5191.19,
+          "netSalary": 4140.37,
+          "bonuses": null,
+          "deductions": 185.02,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2024-11-29",
+          "grossSalary": 4923.31,
+          "netSalary": 3880.81,
+          "bonuses": null,
+          "deductions": 180.1,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        },
+        {
+          "date": "2024-10-29",
+          "grossSalary": 5056.5,
+          "netSalary": 4017.93,
+          "bonuses": null,
+          "deductions": 112.95,
+          "currency": "EUR",
+          "department": "Digital Workplace"
+        }
+      ],
+      "vacations": {
+        "totalDaysAvailable": 26,
+        "totalDaysTaken": 15,
+        "remainingDays": 11,
+        "vacationsTaken": [
+          {
+            "startDate": "2025-10-09",
+            "endDate": "2025-10-11",
+            "durationDays": 3,
+            "type": "Paid Leave"
+          },
+          {
+            "startDate": "2025-09-10",
+            "endDate": "2025-09-11",
+            "durationDays": 2,
+            "type": "Paid Leave"
+          },
+          {
+            "startDate": "2025-08-04",
+            "endDate": "2025-08-07",
+            "durationDays": 4,
+            "type": "RTT"
+          },
+          {
+            "startDate": "2025-07-03",
+            "endDate": "2025-07-04",
+            "durationDays": 2,
+            "type": "RTT"
+          },
+          {
+            "startDate": "2025-06-13",
+            "endDate": "2025-06-15",
+            "durationDays": 3,
+            "type": "Unpaid Leave"
+          },
+          {
+            "startDate": "2025-05-11",
+            "endDate": "2025-05-11",
+            "durationDays": 1,
+            "type": "Paid Leave"
+          }
+        ]
+      },
+      "expenses": {
+        "month": "2025-08-31",
+        "totalAmount": 282.3,
+        "categories": [
+          {
+            "name": "Travel",
+            "items": [
+              {
+                "date": "2025-09-01",
+                "description": "Car hire for data-center visit",
+                "amount": 89,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          },
+          {
+            "name": "Meals",
+            "items": [
+              {
+                "date": "2025-09-01",
+                "description": "Late-night deployment dinner",
+                "amount": 32.8,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          },
+          {
+            "name": "Office Supplies",
+            "items": [
+              {
+                "date": "2025-09-01",
+                "description": "External SSD for backups",
+                "amount": 96.5,
+                "paymentMethod": "Reimbursement"
+              }
+            ]
+          },
+          {
+            "name": "Training",
+            "items": [
+              {
+                "date": "2025-09-02",
+                "description": "Kubernetes certification practice exam",
+                "amount": 64,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "root",
+      "department": "Administration",
+      "payslips": [
+        {
+          "date": "2025-10-28",
+          "grossSalary": 5195.82,
+          "netSalary": 3966.86,
+          "bonuses": 620.45,
+          "deductions": 198.32,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-09-28",
+          "grossSalary": 5084.37,
+          "netSalary": 3840.09,
+          "bonuses": null,
+          "deductions": 176.24,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-08-28",
+          "grossSalary": 4998.74,
+          "netSalary": 3791.16,
+          "bonuses": 340.58,
+          "deductions": 164.11,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-07-28",
+          "grossSalary": 4920.43,
+          "netSalary": 3689.12,
+          "bonuses": null,
+          "deductions": 152.47,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-06-28",
+          "grossSalary": 4876.61,
+          "netSalary": 3680.43,
+          "bonuses": 280.34,
+          "deductions": 139.65,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-05-28",
+          "grossSalary": 4764.29,
+          "netSalary": 3605.74,
+          "bonuses": null,
+          "deductions": 141.98,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-04-28",
+          "grossSalary": 4688.53,
+          "netSalary": 3550.07,
+          "bonuses": 255.75,
+          "deductions": 133.24,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-03-28",
+          "grossSalary": 4570.36,
+          "netSalary": 3443.13,
+          "bonuses": null,
+          "deductions": 125.68,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-02-26",
+          "grossSalary": 4498.97,
+          "netSalary": 3381.68,
+          "bonuses": 240.95,
+          "deductions": 118.37,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2025-01-28",
+          "grossSalary": 4384.78,
+          "netSalary": 3308.7,
+          "bonuses": null,
+          "deductions": 109.52,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2024-12-28",
+          "grossSalary": 4297.64,
+          "netSalary": 3235.73,
+          "bonuses": 220.68,
+          "deductions": 105.84,
+          "currency": "EUR",
+          "department": "Administration"
+        },
+        {
+          "date": "2024-11-28",
+          "grossSalary": 4185.22,
+          "netSalary": 3139.07,
+          "bonuses": null,
+          "deductions": 97.46,
+          "currency": "EUR",
+          "department": "Administration"
+        }
+      ],
+      "vacations": {
+        "totalDaysAvailable": 30,
+        "totalDaysTaken": 15,
+        "remainingDays": 15,
+        "vacationsTaken": [
+          {
+            "startDate": "2025-09-16",
+            "endDate": "2025-09-20",
+            "durationDays": 5,
+            "type": "Paid Leave"
+          },
+          {
+            "startDate": "2025-08-05",
+            "endDate": "2025-08-07",
+            "durationDays": 3,
+            "type": "RTT"
+          },
+          {
+            "startDate": "2025-06-10",
+            "endDate": "2025-06-12",
+            "durationDays": 3,
+            "type": "Paid Leave"
+          },
+          {
+            "startDate": "2025-04-29",
+            "endDate": "2025-04-30",
+            "durationDays": 2,
+            "type": "RTT"
+          },
+          {
+            "startDate": "2025-02-17",
+            "endDate": "2025-02-18",
+            "durationDays": 2,
+            "type": "Unpaid Leave"
+          }
+        ]
+      },
+      "expenses": {
+        "month": "2025-09-01",
+        "totalAmount": 906.8,
+        "categories": [
+          {
+            "name": "Travel",
+            "items": [
+              {
+                "date": "2025-09-04",
+                "description": "Site inspection travel",
+                "amount": 210.5,
+                "paymentMethod": "Credit Card"
+              },
+              {
+                "date": "2025-09-19",
+                "description": "Shuttle service for executives",
+                "amount": 68.4,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          },
+          {
+            "name": "Meals",
+            "items": [
+              {
+                "date": "2025-09-05",
+                "description": "Working lunch with board",
+                "amount": 85.6,
+                "paymentMethod": "Credit Card"
+              },
+              {
+                "date": "2025-09-12",
+                "description": "Strategic review dinner",
+                "amount": 142.3,
+                "paymentMethod": "Reimbursement"
+              }
+            ]
+          },
+          {
+            "name": "Office Supplies",
+            "items": [
+              {
+                "date": "2025-09-09",
+                "description": "Conference room equipment rental",
+                "amount": 120,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          },
+          {
+            "name": "Training",
+            "items": [
+              {
+                "date": "2025-09-23",
+                "description": "Leadership workshop enrollment",
+                "amount": 280,
+                "paymentMethod": "Credit Card"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
