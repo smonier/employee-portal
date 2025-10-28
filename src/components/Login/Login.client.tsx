@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { t } from "i18next";
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
 import LoginFormClient from "./LoginForm.client";
-import WorkspaceNavigationClient from "./WorkspaceNavigation.client";
 import type { JahiaUrlsProps, LoginPersonaProps } from "./types";
 import classes from "./Login.client.module.css";
 import alert from "~/templates/css/alert.module.css";
@@ -16,6 +15,7 @@ interface LoginClientProps {
   isShowRememberMe: boolean;
   siteKey?: string;
   persona: LoginPersonaProps[];
+  displayMode?: "modal" | "inline";
 }
 
 const LoginClient = ({
@@ -27,14 +27,20 @@ const LoginClient = ({
   isShowRememberMe,
   siteKey,
   persona,
+  displayMode = "modal",
 }: LoginClientProps) => {
+  const isInline = displayMode === "inline";
   const [user, setUser] = useState(userHydrated);
   const [loggedIn, setLoggedIn] = useState(isLoggedIn);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(isInline);
 
   const personaList = useMemo(() => persona ?? [], [persona]);
 
   useEffect(() => {
+    if (isInline) {
+      return;
+    }
+
     const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false);
@@ -52,9 +58,12 @@ const LoginClient = ({
       document.removeEventListener("keydown", handleKeyDown);
       document.body.classList.remove("modal-open");
     };
-  }, [isOpen]);
+  }, [isOpen, isInline]);
 
   const showModal = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (isInline) {
+      return;
+    }
     event.preventDefault();
     setIsOpen(true);
   };
@@ -70,6 +79,9 @@ const LoginClient = ({
   };
 
   const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (isInline) {
+      return;
+    }
     if (event.target === event.currentTarget) {
       setIsOpen(false);
     }
@@ -86,16 +98,30 @@ const LoginClient = ({
   return (
     <>
       {loggedIn ? (
+        <div className={classes.loggedCard}>
+          <div className={classes.loggedHeader}>
+            <span className={classes.loggedBadge}>{t("form.login.loggedIn", "Signed in")}</span>
+            <h3 className={classes.loggedName}>{user}</h3>
+            <p className={classes.loggedSubtitle}>{t("form.login.manageAccess", "You now have access to the employee portal experience.")}</p>
+          </div>
+          <div className={classes.loggedActions}>
+            <button type="button" className={classes.logoutBtn} onClick={logout}>
+              {t("form.login.logout")}
+            </button>
+          </div>
+        </div>
+      ) : isInline ? (
         <>
-          <h5 className={classes.capitalize}>{user}</h5>
-          <ul className={classes.list}>
-            <WorkspaceNavigationClient urls={urls} mode={mode} nodePath={nodePath} />
-            <li>
-              <button type="button" className={classes.btn} onClick={logout}>
-                {t("form.login.logout")}
-              </button>
-            </li>
-          </ul>
+          <div className={classes.inlineContainer}>
+            <LoginFormClient
+              loginUrl={urls.loginUrl}
+              isShowRememberMe={isShowRememberMe}
+              setUser={setUser}
+              handleLoggedIn={handleLoggedIn}
+              siteKey={siteKey}
+              persona={personaList}
+            />
+          </div>
         </>
       ) : (
         <>
@@ -108,37 +134,39 @@ const LoginClient = ({
         </>
       )}
 
-      <div
-        className={classes.modalOverlay}
-        data-open={isOpen ? "true" : undefined}
-        aria-hidden={isOpen ? undefined : "true"}
-        onClick={handleOverlayClick}
-      >
+      {!isInline && (
         <div
-          className={classes.modal}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="login-dialog-title"
-          onClick={(event) => event.stopPropagation()}
+          className={classes.modalOverlay}
+          data-open={isOpen ? "true" : undefined}
+          aria-hidden={isOpen ? undefined : "true"}
+          onClick={handleOverlayClick}
         >
-          <h2 id="login-dialog-title" className={classes.hidden}>
-            {t("form.login.login")}
-          </h2>
-          <button type="button" className={classes.close} onClick={() => setIsOpen(false)}>
-            <span aria-hidden="true">&times;</span>
-            <span className={classes.hidden}>{t("jemp.label.close")}</span>
-          </button>
+          <div
+            className={classes.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="login-dialog-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h2 id="login-dialog-title" className={classes.hidden}>
+              {t("form.login.login")}
+            </h2>
+            <button type="button" className={classes.close} onClick={() => setIsOpen(false)}>
+              <span aria-hidden="true">&times;</span>
+              <span className={classes.hidden}>{t("jemp.label.close")}</span>
+            </button>
 
-          <LoginFormClient
-            loginUrl={urls.loginUrl}
-            isShowRememberMe={isShowRememberMe}
-            setUser={setUser}
-            handleLoggedIn={handleLoggedIn}
-            siteKey={siteKey}
-            persona={personaList}
-          />
+            <LoginFormClient
+              loginUrl={urls.loginUrl}
+              isShowRememberMe={isShowRememberMe}
+              setUser={setUser}
+              handleLoggedIn={handleLoggedIn}
+              siteKey={siteKey}
+              persona={personaList}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

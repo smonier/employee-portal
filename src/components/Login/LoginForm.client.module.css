@@ -31,7 +31,7 @@
 .body {
   position: relative;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   flex: 1 1 auto;
   overflow: auto;
   gap: 2.75rem;

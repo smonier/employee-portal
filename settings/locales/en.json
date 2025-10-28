@@ -88,5 +88,7 @@
   "form.login.persona.penny.alt": "Avatar for {{username}}",
   "form.login.persona.robin.function": "Digital workplace administrator",
   "form.login.persona.robin.description": "Maintains navigation, permissions, and governance policies.",
-  "form.login.persona.robin.alt": "Avatar for {{username}}"
+  "form.login.persona.robin.alt": "Avatar for {{username}}",
+  "form.login.loggedIn": "Signed in",
+  "form.login.manageAccess": "You now have access to the employee portal experience."
 }

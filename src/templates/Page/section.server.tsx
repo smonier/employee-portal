@@ -1,8 +1,6 @@
-import { Area, AbsoluteArea, jahiaComponent, Render } from "@jahia/javascript-modules-library";
+import { Area, jahiaComponent, Render } from "@jahia/javascript-modules-library";
 import { Layout } from "../Layout";
 import styles from "./home.module.css";
-
-import type { RenderContext } from "org.jahia.services.render";
 
 type BasicPageProps = {
   "jcr:title": string;
@@ -13,9 +11,9 @@ jahiaComponent(
     componentType: "template",
     nodeType: "jnt:page",
     name: "section",
-    displayName: "Section",
+    displayName: "Section Page with Hero",
   },
-  ({ "jcr:title": title }: BasicPageProps, { renderContext }) => (
+  ({ "jcr:title": title }: BasicPageProps) => (
     <Layout title={title}>
       <Render content={{ nodeType: "jempnt:navBar" }} />
       <Area name="header" allowedNodeTypes={["jempnt:hero"]} numberOfItems={1} />
@@ -26,11 +24,6 @@ jahiaComponent(
           </div>
         </section>
       </main>
-      <AbsoluteArea
-        name="footer"
-        parent={(renderContext as RenderContext).getSite()}
-        nodeType="jempnt:footer"
-      />
     </Layout>
   ),
 );

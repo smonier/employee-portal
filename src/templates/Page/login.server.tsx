@@ -1,8 +1,5 @@
 import { Area, jahiaComponent, Render } from "@jahia/javascript-modules-library";
 import { Layout } from "../Layout";
-import styles from "./home.module.css";
-
-
 type BasicPageProps = {
   "jcr:title": string;
 };
@@ -11,19 +8,16 @@ jahiaComponent(
   {
     componentType: "template",
     nodeType: "jnt:page",
-    name: "basic",
-    displayName: "Basic page",
+    name: "login",
+    displayName: "Login Page",
   },
   ({ "jcr:title": title }: BasicPageProps) => (
     <Layout title={title}>
       <Render content={{ nodeType: "jempnt:navBar" }} />
-      <main>
-        <section id="content" className={styles.contentZone}>
-          <div className={styles.container}>
-            <Area name="main" />
-          </div>
-        </section>
-      </main>
+      <Area name="header" allowedNodeTypes={["jempnt:hero"]} numberOfItems={1} />
+
+      <Area name="main" allowedNodeTypes={["jempnt:login"]} numberOfItems={1} />
+
     </Layout>
   ),
 );

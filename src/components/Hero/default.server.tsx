@@ -1,15 +1,26 @@
 import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
-import { t } from "i18next";
 import type { CSSProperties } from "react";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
+import type { RenderContext } from "org.jahia.services.render";
 import type { HeroProps } from "./types.js";
 import classes from "./component.module.css";
 
-const resolveImageUrl = (image?: HeroProps["jemp:backgroundImage"]) => {
+const resolveImageUrl = (
+  image: HeroProps["jemp:backgroundImage"],
+  renderContext?: RenderContext,
+) => {
   if (!image) return null;
   if (typeof image === "string") return image;
   if (typeof image === "object" && "getPath" in image && typeof image.getPath === "function") {
-    return `/files/default${(image as JCRNodeWrapper).getPath()}`;
+    const path = (image as JCRNodeWrapper).getPath();
+    const mode =
+      typeof renderContext?.getMode === "function"
+        ? renderContext.getMode()
+        : renderContext?.isEditMode?.()
+          ? "edit"
+          : "live";
+    const segment = mode === "live" ? "live" : "default";
+    return `/files/${segment}${path}`;
   }
   return null;
 };
@@ -56,15 +67,18 @@ jahiaComponent(
     name: "default",
     displayName: "Hero Banner",
   },
-  (props: HeroProps) => {
+  (props: HeroProps, { renderContext }: { renderContext: RenderContext }) => {
     const title = props["jcr:title"];
     const subtitle = props["jemp:subtitle"];
     const ctaLabelRaw = typeof props["jemp:ctaLabel"] === "string" ? props["jemp:ctaLabel"].trim() : "";
     const hasCtaLabel = Boolean(ctaLabelRaw);
-    const backgroundUrl = resolveImageUrl(props["jemp:backgroundImage"]);
+    const backgroundUrl = resolveImageUrl(props["jemp:backgroundImage"], renderContext);
     const href = resolveLink(props);
     const hasLink = Boolean(href);
-    const linkTarget = props["seu:linkTarget"] && props["seu:linkTarget"] !== "_self" ? props["seu:linkTarget"] : undefined;
+    const linkTarget =
+      props["seu:linkTarget"] && props["seu:linkTarget"] !== "_self"
+        ? props["seu:linkTarget"]
+        : undefined;
     const rel = linkTarget === "_blank" ? "noopener noreferrer" : undefined;
 
     const style: CSSProperties | undefined = backgroundUrl
@@ -81,25 +95,29 @@ jahiaComponent(
           </span>
           <h2 className={classes.title}>{title}</h2>
           {subtitle && <p className={classes.subtitle}>{subtitle}</p>}
-          <div className={classes.ctaRow}>
-            {hasLink && hasCtaLabel ? (
-              <a className={classes.cta} href={href ?? "#"} target={linkTarget} rel={rel}>
-                {ctaLabelRaw}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </a>
-            ) : hasLink ? (
-              <span className={classes.fallbackNote}>
-                {t("jempnt_hero.noLabel", "Add a label to display the call-to-action.")}
-              </span>
-            ) : (
-              <span className={classes.fallbackNote}>
-                {t("jempnt_hero.noLink", "Add a link to enable the call-to-action.")}
-              </span>
-            )}
-          </div>
+          {hasCtaLabel && (
+            <div className={classes.ctaRow}>
+              {hasLink ? (
+                <a className={classes.cta} href={href ?? "#"} target={linkTarget} rel={rel}>
+                  {ctaLabelRaw}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.75}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </a>
+              ) : (
+                <span className={classes.ctaStatic}>{ctaLabelRaw}</span>
+              )}
+            </div>
+          )}
         </div>
       </section>
     );

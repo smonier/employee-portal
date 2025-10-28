@@ -1,7 +1,6 @@
-import { jahiaComponent, Render, Area, AbsoluteArea } from "@jahia/javascript-modules-library";
+import { jahiaComponent, Render, Area } from "@jahia/javascript-modules-library";
 import { Layout } from "../Layout";
 import styles from "./home.module.css";
-import type { RenderContext } from "org.jahia.services.render";
 
 type HomePageProps = {
   "jcr:title": string;
@@ -17,7 +16,7 @@ jahiaComponent(
     name: "home",
     displayName: "Employee Portal Home",
   },
-  ({ "jcr:title": title }: HomePageProps, { renderContext }) => (
+  ({ "jcr:title": title }: HomePageProps) => (
     <Layout title={title}>
       <Render content={{ nodeType: "jempnt:navBar" }} />
 
@@ -54,12 +53,6 @@ jahiaComponent(
           </div>
         </section>
       </main>
-        <AbsoluteArea
-          name="footer"
-          parent={(renderContext as RenderContext).getSite()}
-          nodeType="jempnt:footer"
-        />
-
     </Layout>
   ),
 );
