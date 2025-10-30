@@ -6,9 +6,7 @@
 // Initialize menu toggle functionality when DOM is ready
 if (typeof document !== "undefined") {
   document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.querySelector(
-      '[aria-label="Toggle navigation menu"]',
-    ) as HTMLButtonElement;
+    const menuToggle = document.querySelector('[data-nav-toggle="true"]') as HTMLButtonElement;
     const navList = menuToggle?.parentElement?.querySelector("ul") as HTMLElement;
     const dropdownItems = document.querySelectorAll('li[class*="hasDropdown"]');
 

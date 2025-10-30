@@ -1,0 +1,21 @@
+{
+  "name": "jempnt:gridRow",
+  "description": "Grid Row component",
+  "dynamic": false,
+
+  "fields": [
+    {
+      "name": "jemp:columns",
+      "selectorType": "Choicelist",
+      "selectorOptionsMap": {
+        "allowCustomEntry": "false"
+      },
+      "valueConstraints": [
+        { "displayValue": "1 column", "value": { "type": "String", "value": "1" } },
+        { "displayValue": "2 columns", "value": { "type": "String", "value": "2" } },
+        { "displayValue": "3 columns", "value": { "type": "String", "value": "3" } },
+        { "displayValue": "4 columns", "value": { "type": "String", "value": "4" } }
+      ]
+    }
+  ]
+}

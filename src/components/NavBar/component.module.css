@@ -1,5 +1,5 @@
 .nav {
-  background: linear-gradient(to bottom, #024, #000);
+  background: linear-gradient(to bottom, var(--portal-color-primary), var(--portal-color-primary-dark));
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -51,7 +51,6 @@
   background: transparent;
   border: none;
   padding: 0.5rem;
-  margin-left: auto;
   cursor: pointer;
 }
 
@@ -74,11 +73,18 @@
   padding: 0;
   gap: 0.5rem;
   flex: 1;
+  align-items: center;
 }
 
 .navItem {
   position: relative;
   display: list-item;
+}
+
+.languageSwitcher {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
 .navLink {

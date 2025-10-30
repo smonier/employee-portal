@@ -1,18 +1,14 @@
-.article {
-  --content-max-width: 1100px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  background: linear-gradient(180deg, #eef2ff 0%, #ffffff 45%);
-  padding-bottom: clamp(4rem, 8vw, 6rem);
-}
+
 
 .hero {
   position: relative;
   max-width: var(--content-max-width);
-  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem);
   padding: clamp(3rem, 6vw, 4.25rem) clamp(2rem, 5vw, 4.75rem);
-  border-radius: 32px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   overflow: hidden;
   color: #f8fafc;
   background:

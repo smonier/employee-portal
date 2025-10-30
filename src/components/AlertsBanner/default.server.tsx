@@ -1,4 +1,5 @@
 import { jahiaComponent, AddResources } from "@jahia/javascript-modules-library";
+import { t } from "i18next";
 import type { Props } from "./types.js";
 import classes from "./component.module.css";
 
@@ -61,7 +62,7 @@ jahiaComponent(
         <button
           className={classes.closeButton}
           data-alert-close={alertId}
-          aria-label="Close alert"
+          aria-label={t("alertsBanner.closeAlertAria", "Close alert")}
           type="button"
         >
           ×

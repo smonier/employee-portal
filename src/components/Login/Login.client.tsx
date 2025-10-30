@@ -70,12 +70,19 @@ const LoginClient = ({
 
   const logout = async () => {
     await fetch(urls.logoutUrl);
-    setLoggedIn(false);
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    } else {
+      setLoggedIn(false);
+    }
   };
 
   const handleLoggedIn = () => {
     setLoggedIn(true);
     setIsOpen(false);
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
   };
 
   const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {

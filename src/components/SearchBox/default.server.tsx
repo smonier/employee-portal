@@ -3,6 +3,7 @@ import {
   AddResources,
   buildModuleFileUrl,
 } from "@jahia/javascript-modules-library";
+import { t } from "i18next";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./component.module.css";
 
@@ -15,7 +16,9 @@ jahiaComponent(
   ({ node }: { node?: JCRNodeWrapper }) => {
     const placeholder = node?.hasProperty("jemp:placeholder")
       ? node.getProperty("jemp:placeholder").getString()
-      : "Search...";
+      : t("search.placeholder");
+    const formAriaLabel = t("search.formAriaLabel", "Site search");
+    const submitLabel = t("search.submitLabel", "Search");
 
     return (
       <>
@@ -24,7 +27,7 @@ jahiaComponent(
           resources={buildModuleFileUrl("dist/client/components/SearchBox/island.client.js")}
         />
         <div className={classes.searchBox} data-search-box>
-          <form className={classes.searchForm} role="search" aria-label="Site search">
+          <form className={classes.searchForm} role="search" aria-label={formAriaLabel}>
             <input
               type="search"
               name="q"
@@ -33,7 +36,12 @@ jahiaComponent(
               aria-label={placeholder}
               autoComplete="off"
             />
-            <button type="submit" className={classes.searchButton} aria-label="Search">
+            <button
+              type="submit"
+              className={classes.searchButton}
+              aria-label={submitLabel}
+              title={submitLabel}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

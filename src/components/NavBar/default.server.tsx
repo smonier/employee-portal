@@ -8,7 +8,9 @@ import {
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { RenderContext } from "org.jahia.services.render";
 import { HomeIcon } from "~/components/shared";
+import { t } from "i18next";
 import classes from "./component.module.css";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 /** Get all child pages of a node. */
 const getChildPages = (node: JCRNodeWrapper) =>
@@ -32,31 +34,37 @@ jahiaComponent(
     // Level 1: Main navigation - children of the home page
     const level1Pages = getChildPages(homePage);
 
+    const navAriaLabel = t("nav.mainAriaLabel", "Main navigation");
+    const homeText = t("nav.homeLabel", "Home");
+    const homeAriaLabel = t("nav.homeAriaLabel", "Home");
+    const toggleLabel = t("nav.toggleMenu", "Toggle navigation menu");
+
     return (
       <>
         <AddResources
           type="javascript"
           resources={buildModuleFileUrl("dist/client/components/NavBar/menu.client.ts.js")}
         />
-        <nav className={classes.nav} role="navigation" aria-label="Main navigation">
+        <nav className={classes.nav} role="navigation" aria-label={navAriaLabel}>
           <div className={classes.navContainer}>
             {/* Home Link (Level 0) - Always visible on the left */}
             <a
               href={homeUrl}
               className={classes.homeLink}
-              aria-label="Home"
+              aria-label={homeAriaLabel}
               aria-current={isHomePage ? "page" : undefined}
             >
               <HomeIcon width="20px" height="20px" />
-              <span className={classes.homeLinkText}>Home</span>
+              <span className={classes.homeLinkText}>{homeText}</span>
             </a>
 
             {/* Mobile Menu Toggle */}
             <button
               className={classes.menuToggle}
-              aria-label="Toggle navigation menu"
+              aria-label={toggleLabel}
               aria-expanded="false"
               type="button"
+              data-nav-toggle="true"
             >
               <span className={classes.menuIcon}></span>
               <span className={classes.menuIcon}></span>
@@ -105,6 +113,7 @@ jahiaComponent(
                   </li>
                 );
               })}
+              <LanguageSwitcher />
             </ul>
           </div>
         </nav>

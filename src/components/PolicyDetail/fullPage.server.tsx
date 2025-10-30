@@ -1,25 +1,50 @@
 import { jahiaComponent } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
-import type { Props } from "./types.js";
+import type { Props } from "./types";
 import classes from "./fullPage.module.css";
+import type { RenderContext } from "org.jahia.services.render";
 
-const formatEffectiveDate = (value?: string) => {
-  if (!value) return null;
+const formatEffectiveDate = (value?: string, locale = "en") => {
+  if (!value) {
+    return undefined;
+  }
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return null;
-  return date.toLocaleDateString(undefined, {
+  if (Number.isNaN(date.getTime())) {
+    return undefined;
+  }
+  return new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",
-  });
+  }).format(date);
 };
 
 const extractLeadParagraph = (html?: string) => {
-  if (!html) return null;
+  if (!html) {
+    return undefined;
+  }
   const match = html.match(/<p[^>]*>(.*?)<\/p>/i);
-  if (!match) return null;
+  if (!match) {
+    return undefined;
+  }
   const text = match[1]?.replace(/<[^>]+>/g, "").trim();
-  return text || null;
+  return text || undefined;
+};
+
+const resolveLocale = (renderContext: RenderContext) => {
+  const contextWithLocale = renderContext as unknown as {
+    getUILocale?: () => unknown;
+    getLocale?: () => unknown;
+  };
+  const localeCandidate =
+    typeof contextWithLocale.getUILocale === "function"
+      ? contextWithLocale.getUILocale()
+      : typeof contextWithLocale.getLocale === "function"
+        ? contextWithLocale.getLocale()
+        : null;
+  return localeCandidate && typeof (localeCandidate as { toString?: () => string }).toString === "function"
+    ? (localeCandidate as { toString: () => string }).toString()
+    : "en";
 };
 
 jahiaComponent(
@@ -29,22 +54,19 @@ jahiaComponent(
     name: "fullPage",
     displayName: "Policy Detail - Full Page",
   },
-  (rawProps: Props) => {
+  (rawProps: Props, { renderContext }: { renderContext: RenderContext }) => {
+    const locale = resolveLocale(renderContext);
     const title = rawProps["jcr:title"];
     const description = rawProps["jemp:description"];
-    const effectiveDate = formatEffectiveDate(rawProps["jemp:effectiveDate"]);
-    const uuid = rawProps["jcr:uuid"] || Math.random().toString(36).slice(2);
-    const contentId = `policy-content-${uuid}`;
+    const effectiveDate = formatEffectiveDate(rawProps["jemp:effectiveDate"], locale);
     const leadParagraph = extractLeadParagraph(description);
 
     return (
-      <article className={classes.article}>
-        <header className={classes.hero}>
-          <span className={classes.heroAccent} aria-hidden="true" />
+      <article>
+        <section className={classes.hero}>
+          <div className={classes.heroAccent} aria-hidden="true" />
           <div className={classes.heroInner}>
-            <span className={classes.label}>
-              {t("jempnt_policy.fullPage.label", "Company Policy")}
-            </span>
+            <span className={classes.label}>{t("jempnt_policy.fullPage.label", "Company Policy")}</span>
             <h1 className={classes.title}>{title}</h1>
             {leadParagraph && <p className={classes.lead}>{leadParagraph}</p>}
             {effectiveDate && (
@@ -54,11 +76,10 @@ jahiaComponent(
               </p>
             )}
           </div>
-        </header>
+        </section>
 
         <div className={classes.contentShell}>
           <section
-            id={contentId}
             className={classes.bodyWrapper}
             data-empty={description ? undefined : "true"}
           >
@@ -92,9 +113,6 @@ jahiaComponent(
                   "Have questions about this policy? Contact your HR partner for personalized guidance.",
                 )}
               </p>
-              <a className={classes.sidebarButton} href={`#${contentId}`}>
-                {t("jempnt_policy.fullPage.cta", "Jump to full policy")}
-              </a>
               <p className={classes.sidebarHelp}>
                 {t(
                   "jempnt_policy.fullPage.help",

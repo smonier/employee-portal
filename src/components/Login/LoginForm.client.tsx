@@ -85,12 +85,12 @@ const LoginFormClient = ({
               </label>
               <input
                 autoFocus
-                id="inputUser"
-                type="text"
-                name="username"
-                placeholder="robin"
-                className={classes.input}
-                autoComplete="username"
+              id="inputUser"
+              type="text"
+              name="username"
+              placeholder={t("form.login.usernamePlaceholder", "robin")}
+              className={classes.input}
+              autoComplete="username"
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>

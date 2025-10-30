@@ -1,4 +1,5 @@
 import { buildNodeUrl, getChildNodes, jahiaComponent } from "@jahia/javascript-modules-library";
+import { t } from "i18next";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./component.module.css";
 
@@ -19,7 +20,7 @@ jahiaComponent(
 
     const title = node.hasProperty("jcr:title")
       ? node.getProperty("jcr:title").getString()
-      : "IT Help & Support";
+      : t("kb.list.defaultTitle", "IT Help & Support");
     const limit = node.hasProperty("jemp:limit")
       ? Number(node.getProperty("jemp:limit").getLong())
       : 5;

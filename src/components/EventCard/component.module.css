@@ -10,6 +10,7 @@
 .title {
   margin: 0;
   font-size: 1.25rem;
+  color: #1f2937;
 }
 
 .summary {
@@ -22,7 +23,7 @@
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
   font-size: 0.9rem;
-  color: #0f172a;
+  color: #475569;
 }
 
 .actions {

@@ -1,0 +1,40 @@
+.gridRow {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(248, 250, 252, 0.6);
+  border: 1px dashed transparent;
+  border-radius: 18px;
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.columnEdit {
+  border-color: rgba(148, 163, 184, 0.55);
+  background: rgba(241, 245, 249, 0.7);
+}
+
+.columnContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .gridRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridRow {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
