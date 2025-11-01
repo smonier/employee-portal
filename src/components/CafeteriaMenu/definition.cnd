@@ -1,0 +1,3 @@
+[ jempnt:cafeteriaMenu ] > jnt:content, jempmix:component
+ - jemp:weekLabel (string) i18n
+ + * (jempnt:cafeteriaMenuItem)

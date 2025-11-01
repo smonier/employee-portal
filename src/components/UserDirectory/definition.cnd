@@ -1,0 +1,2 @@
+[ jempnt:userDirectory ] > jnt:content, jmix:editorialContent, mix:title, jempmix:component
+ - jemp:subtitle (string) i18n

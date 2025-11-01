@@ -81,7 +81,7 @@ const LoginClient = ({
     setLoggedIn(true);
     setIsOpen(false);
     if (typeof window !== "undefined") {
-      window.location.reload();
+      window.location.href = '/sites/empportal/home/my-portal.html';
     }
   };
 
