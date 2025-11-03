@@ -1,161 +1,187 @@
-# Employee Portal — Jahia JavaScript Module
+# Employee Portal (Jahia JavaScript Module)
 
-A full-featured employee experience built as a Jahia JavaScript (SSR) module. The project ships reusable, server-rendered React components, optional islands for client hydration, ready-to-use CND definitions, localized resource bundles, and mock HR data for rapid prototyping.
+A production-style employee experience for Jahia built with server-rendered React.  
+The module bundles reusable components, ready-to-install CND definitions, localized resources, and mock data so you can stand up a portal, demo experience, or jump-start a real rollout in minutes.
 
-## Table of contents
+## Table of Contents
 
-- [Features](#features)
-- [Technology stack](#technology-stack)
-- [Project structure](#project-structure)
-- [Getting started](#getting-started)
-- [Available scripts](#available-scripts)
-- [Component library](#component-library)
-- [Templates & layout](#templates--layout)
-- [Content definitions & i18n](#content-definitions--i18n)
-- [Mock data](#mock-data)
-- [Quality & conventions](#quality--conventions)
+- [Highlights](#highlights)
+- [Tech Stack](#tech-stack)
+- [Repository Layout](#repository-layout)
+- [Component Catalog](#component-catalog)
+- [Templates & Layouts](#templates--layouts)
+- [Content Definitions & Locales](#content-definitions--locales)
+- [Mock Data](#mock-data)
+- [Development Workflow](#development-workflow)
+- [Available Yarn Scripts](#available-yarn-scripts)
+- [Quality & Conventions](#quality--conventions)
 - [Deploying to Jahia](#deploying-to-jahia)
+- [Extending the Portal](#extending-the-portal)
 
-## Features
+## Highlights
 
-- **Server-side rendered UI** powered by `jahiaComponent()` with optional island hydration for interactive widgets.
-- **Comprehensive component set** covering navigation, alerts, search, knowledge bases, policies, hero banners, event cards, quick links, carousel/tiles layouts, and more.
-- **HR Insights dashboard** that filters payslips, vacations, and expenses per logged-in user using localized copy and mock HR datasets.
-- **Responsive layouts and theming** via CSS modules and shared design tokens; modern light look & feel throughout the portal.
-- **Internationalization** with English/French resources for component strings, tooltips, and content definitions.
-- **Structured content definitions (CND)** scoped at the component level plus a global definition file for shared types.
-- **Build & packaging pipeline** based on Vite + TypeScript with outputs ready for Jahia deployment.
+- **SSR-first architecture** – every UI is declared via `jahiaComponent()` with optional client “islands” when interactivity is required.
+- **Comprehensive component library** – navigation, HR dashboards, job postings, alerts, queries, knowledge resources, and more, all styled with the same visual language.
+- **Ready-to-use authoring experience** – each component ships with its own `definition.cnd` file plus translated editor labels/tooltips (English & French).
+- **Modern tooling** – Vite 7, TypeScript 5, React 19, CSS Modules, ESLint 9, and Prettier 3.
+- **Deployment-friendly build** – `yarn build && yarn package` generates the Jahia module archive (`dist/package.tgz`) for installation or CI delivery.
 
-## Technology stack
+## Tech Stack
 
-- **Runtime:** React 19 with Jahia JavaScript Modules Library
-- **Bundler:** Vite 7 (SSR build + client assets)
-- **Language:** TypeScript 5
-- **Styling:** CSS Modules, modern-normalize, shared design-system primitives
-- **i18n:** i18next + Jahia resource bundles (`.properties` / `.json`)
-- **Tooling:** ESLint 9, Prettier 3, Yarn 4, Node 22+
+- **Runtime**: React 19 + Jahia JavaScript Modules Library (SSR)
+- **Language**: TypeScript 5 (strict mode)
+- **Bundler**: Vite 7 (SSR + client manifests)
+- **Styling**: CSS Modules with shared tokens and design primitives
+- **i18n**: i18next JSON bundles for runtime copy + Jahia `.properties` resource bundles for Content Editor UI
+- **Tooling**: Yarn 4 (Berry), Node.js 22+, ESLint 9, Prettier 3
 
-## Project structure
+## Repository Layout
 
 ```
-src/
-  components/
-    AlertsBanner/             # Alert banner with dismiss & types
-    HrInsights/               # HR data tables (payslips, vacations, expenses)
-    JcrQuery/                 # Query-driven cards, carousel, tiles layouts
-    NavBar/                   # Global navigation with dropdowns
-    QuickLink/                # Individual quick link cards
-    SearchBox/                # Hydrated search box island
-    TwoColumnRow/             # Flexible grid/row layouts
-    ...                       # Additional feature components
-    shared/                   # Common UI primitives (Grid, Icons, HeadingSection)
-  data/
-    hrMockData.json           # Mock HR dataset keyed by user
-  templates/
-    Layout.tsx                # Portal shell (header, footer injection)
-    Page/                     # Home, section, login, basic templates
-    MainResource/             # Wrapper for resource-driven pages
-settings/
-  definition.cnd              # Global content definitions
-  resources/                  # Resource bundles (en/fr)
-  locales/                    # JSON locale overrides
-static/                       # Static assets served by Jahia
+├─ src/
+│  ├─ components/
+│  │  ├─ <ComponentName>/
+│  │  │  ├─ default.server.tsx      # SSR entry (mandatory)
+│  │  │  ├─ *.client.tsx            # Optional island(s) for hydration
+│  │  │  ├─ component.module.css    # Component-scoped styles
+│  │  │  ├─ definition.cnd          # Content type definition
+│  │  │  └─ additional views        # e.g. list.server.tsx, fullPage.server.tsx
+│  │  └─ shared/                    # Grid, Icons, HeadingSection, helpers
+│  ├─ data/hrMockData.json          # Demo HR dataset
+│  ├─ templates/                    # Page/layout templates
+│  └─ global.d.ts                   # Ambient type declarations
+├─ settings/
+│  ├─ definition.cnd                # Global mixins / shared types
+│  ├─ locales/<lang>.json           # Runtime translation strings (i18next)
+│  └─ resources/employee-portal_<lang>.properties  # Content Editor bundles
+├─ packages/design-system/          # Lightweight icon & form primitives (used by components)
+├─ dist/                            # Build output (ignored until you run `yarn build`)
+└─ README.md
 ```
 
-## Getting started
+## Component Catalog
+
+Every component follows the same structure: SSR view(s), optional islands, module-scoped CSS, and content definition. The table below lists each component and the views shipped out of the box.
+
+| Component | Views / Files | Notes |
+|-----------|---------------|-------|
+| **AlertContainer** | `default.server.tsx` | Wraps multiple alerts with layout + animation support. |
+| **AlertsBanner** | `default.server.tsx`, `close.client.ts` | Timed alert banner with dismissal logic, severity levels, and expiry awareness. |
+| **CafeteriaMenu** | `default.server.tsx`, `fullPage.server.tsx`, `component.module.css` | Weekly cafeteria planner with filters, full-page immersion, and item detail integration. |
+| **CafeteriaMenuItem** | `component.module.css`, `definition.cnd` | Authoring definition for individual dishes rendered inside the menu views. |
+| **ContributionModal** | `default.server.tsx` | Highlighted contribution CTA with configurable copy and link. |
+| **EventCard** | `default.server.tsx`, `card.server.tsx`, `fullPage.server.tsx`, `cm.server.tsx` | Event teaser, card, full detail page, and Content Editor preview. |
+| **Footer** | `default.server.tsx` | Portal footer with links and localized copy. |
+| **GridRow** | `default.server.tsx` | Flexible grid layout component backing page sections or query output. |
+| **Hero** | `default.server.tsx` | Large hero banner with optional CTA, subtitle, and background imagery. |
+| **HrInsights** | `default.server.tsx` | HR analytics dashboard pulling from mock data (payslips, vacations, expenses). |
+| **JcrQuery** | `default.server.tsx`, `inline.server.tsx`, `carousel.server.tsx`, `carousel.island.client.tsx`, `tilesGrid.server.tsx`, `default.module.css` | Generic query renderer with default grid, inline snippets, carousel (hydrated), and tile layouts. |
+| **JobPosting** | `default.server.tsx`, `cm.server.tsx`, `list.server.tsx`, `fullPage.server.tsx`, `component.module.css`, `card.module.css`, `list.module.css`, `utils.ts` | Rich job posting (JSON-LD), Content Editor card, query list/teaser, and immersive full-page template. |
+| **KBList** | `default.server.tsx` | Knowledge base category list pulling articles by query. |
+| **KnowledgeBaseArticle** | `default.server.tsx`, `fullPage.server.tsx`, `cm.server.tsx` | Article view with rich content, metadata, and CM preview. |
+| **Login** | `default.server.tsx`, `form.server.tsx`, `Login.client.tsx`, `LoginCard.client.tsx`, `utils.client.ts` | Collaborative login screen with persona pickers and actual form handling. |
+| **MyCards** | `default.server.tsx`, `component.module.css` | Dashboard card container fed by Content Editor. |
+| **NavBar** | `default.server.tsx`, `LanguageSwitcher.client.tsx`, `LanguageSwitcher.client.module.css` | Responsive global navigation with dropdowns and localized language switcher. |
+| **NewsArticle** | `default.server.tsx`, `card.server.tsx`, `fullPage.server.tsx`, `cm.server.tsx` | News article family: teaser card, full article layout, and editorial preview. |
+| **PolicyDetail** | `default.server.tsx`, `fullPage.server.tsx`, `cm.server.tsx` | Policy detail view including metadata, effective dates, and full-page layout. |
+| **QuickLink** | `default.server.tsx`, `types.ts` | Single quick access link; often rendered via QuickLinkList. |
+| **QuickLinkList** | `default.server.tsx` | Grouping component to render authored quick links. |
+| **SearchBox** | `default.server.tsx`, `island.client.ts` | Hydrated search experience with accessible form semantics. |
+| **TileLink** | `default.server.tsx`, `component.module.css` | Icon-centric tile used on dashboards or landing pages. |
+| **Training** | `default.server.tsx`, `list.server.tsx`, `card.server.tsx`, `fullPage.server.tsx`, `cm.server.tsx`, `utils.ts` | Training promotion with card/list views, aggregator support, and rich detail layout. |
+| **TwoColumnRow** | `default.server.tsx`, `component.module.css` | Editor-configurable dual-column section with droppable areas. |
+| **UnomiProfileCard** | `default.server.tsx`, `island.client.tsx`, `component.module.css` | Personalized profile widget that hydrates client-side with Unomi data. |
+| **UserDirectory** | `default.server.tsx`, `UserDirectory.client.tsx` | Hydrated user directory with search, empty/loading states, and mock data adapter. |
+
+> Tip: every component folder also includes `definition.cnd` and localized resource keys for the Content Editor. When you add a new view, update the bundle to keep the authoring UI polished.
+
+## Templates & Layouts
+
+- `src/templates/Layout.tsx` – global shell that wires navigation, footers, alerts, and grid primitives.
+- `src/templates/Page/` – page templates for `home`, `section`, `apps`, `login`, `basic`, etc., all rendered via SSR components.
+- `src/templates/MainResource/` – wrapper to host resource-driven content (policies, news, job postings) with consistent chrome.
+- `src/templates/css/` – shared styles for template-level UIs (e.g., alert modules).
+
+## Content Definitions & Locales
+
+- **Component-level CNDs** live alongside each component (`definition.cnd`) to keep schema and implementation coupled.
+- **Global mixins & shared types** reside in `settings/definition.cnd`.
+- **Editor resource bundles** (`settings/resources/employee-portal_[en|fr].properties`) translate node type names, field labels, and tooltips.
+- **Runtime translations** (`settings/locales/[en|fr].json`) are consumed via `i18next` inside components.
+- **Remember**: when you add fields, update both the component CND and the resource bundles so the authoring UI stays bilingual.
+
+## Mock Data
+
+- `src/data/hrMockData.json` contains demo content for the HR Insights module (payslips, vacations, expenses).
+- Each dataset is keyed by Jahia user (Pam, Penny, Robin, root); add more users to expand demos.
+- Dates are relative to “today” to keep dashboards relevant during demos and smoke tests.
+
+## Development Workflow
 
 1. **Prerequisites**
-   - Node.js ≥ 22
-   - Yarn ≥ 4 (project uses Yarn modern releases)
-   - A Jahia runtime with the Jahia JavaScript Modules feature enabled
+   - Node.js 22+
+   - Yarn 4 (`corepack enable` is recommended)
+   - Local Jahia runtime with the JavaScript Modules feature (for end-to-end testing)
 
 2. **Install dependencies**
    ```bash
    yarn install
    ```
 
-3. **Run in watch/SSR mode**
+3. **Run in watch mode**
    ```bash
    yarn dev
    ```
-   This runs the Vite build in watch mode to continuously emit the SSR bundle (`dist/server`) and client assets (`dist/client`).
+   This runs the SSR + client builds in watch mode, emitting files into `dist/` whenever you save.
 
-4. **Connect to Jahia**
-   - Deploy the generated bundle to your Jahia runtime (see [Deploying to Jahia](#deploying-to-jahia)).
-   - Map templates/components within Jahia (page templates, resource types, etc.) as needed.
+4. **Iterate**
+   - Add/Edit components under `src/components`.
+   - Update CNDs and resource bundles alongside the component.
+   - Use the JCR Query component or placeholders in templates to surface your changes quickly.
 
-## Available scripts
+5. **Preview in Jahia**
+   - Use `yarn package` (or `yarn build`) to produce `dist/package.tgz`.
+   - Install the package into Jahia (admin UI or CLI).
+   - Map templates/components in Page Builder or Content Editor and verify authoring behavior.
 
-| Script          | Description                                                                 |
-|-----------------|-----------------------------------------------------------------------------|
-| `yarn dev`      | Build in watch mode; regenerates SSR bundle and assets on every change.     |
-| `yarn build`    | Type-check, run a production Vite build, then package the module.           |
-| `yarn package`  | Produce `dist/package.tgz` for manual deployment.                           |
-| `yarn deploy`   | Run `jahia-deploy` (requires local Jahia CLI configuration).                |
-| `yarn lint`     | Run ESLint on the entire codebase.                                          |
-| `yarn format`   | Format files with Prettier.                                                 |
-| `yarn clean`    | Remove the `dist/` directory.                                               |
+## Available Yarn Scripts
 
-## Component library
+| Script | Description |
+|--------|-------------|
+| `yarn dev` | Run the Vite SSR build in watch mode (SSR + client output). |
+| `yarn build` | Type-check then perform a production Vite build (SSR + client). |
+| `yarn package` | Package the module into `dist/package.tgz` for manual deployment. |
+| `yarn jahia-deploy` | Deploy using the Jahia CLI (configure `.env` and CLI credentials first). |
+| `yarn lint` | Run ESLint across the repo. |
+| `yarn format` | Format sources with Prettier. |
+| `yarn clean` | Remove `dist/` output. |
 
-Each component lives in `src/components/<Name>` and typically provides:
+## Quality & Conventions
 
-- `default.server.tsx` — the SSR entry (registered via `jahiaComponent()`).
-- Optional `*.client.tsx|ts` island for hydration.
-- `component.module.css` for locally-scoped styles.
-- `definition.cnd` and resource bundle entries for content editor integration.
-
-Highlighted components:
-
-- **AlertsBanner** – Timed alerts with close interaction and expiry handling.
-- **AlertContainer** – Groups alert banners and manages layout.
-- **HrInsights** – Displays payslips, vacation summaries, or expenses per user with localized metrics.
-- **JcrQuery** – Reusable query-driven views (default grid, carousel with hydration, tiles).
-- **NavBar** – Global navigation embedded in the layout, pulling icons from the shared set.
-- **QuickLink / QuickLinkList** – Editor-managed shortcuts surfaced on the home page.
-- **SearchBox** – Hydrated search island with auto-complete.
-- **EventCard / NewsArticle / PolicyDetail / KnowledgeBaseArticle** – Detail and card views for typical intranet content.
-- **TwoColumnRow** – Flexible content layout supporting configurable column widths and rich text.
-- **UnomiProfileCard** – Personalized profile widget with client-side data fetching.
-
-Shared utilities (icons, grid system, typography helpers) are available under `src/components/shared`.
-
-## Templates & layout
-
-- **Layout.tsx** centralizes the global chrome (nav, footer, alerts) and is used by every template.
-- **Page templates** include home, section, login, and basic variants located under `src/templates/Page/`.
-- **MainResource** wraps resource-driven views with consistent layout and optional child rendering.
-- Templates leverage the same component patterns (server-rendered React with optional islands) to keep page logic consistent.
-
-## Content definitions & i18n
-
-- Global definitions live in `settings/definition.cnd`; component-specific definitions reside alongside each component in `definition.cnd`.
-- Resource bundles for editor-facing labels/tooltips are stored in `settings/resources/employee-portal_[en|fr].properties`.
-- Front-end translations use `settings/locales/[en|fr].json` and are consumed via `i18next` (e.g., HrInsights table labels).
-- When adding new content types, mirror the existing pattern: update the component `definition.cnd`, provide localized keys, and sync the resource bundles.
-
-## Mock data
-
-- `src/data/hrMockData.json` contains mock HR records (payslips, vacations, expenses) for the demo users Pam, Penny, Robin, and root.
-- The HrInsights component filters data by the logged-in Jahia username; add new entries in the JSON file to extend the experience for additional users.
-- Dates are generated relative to the current day to keep sample data fresh during demos.
-
-## Quality & conventions
-
-- TypeScript strictness and `tsconfig.json` align with SSR rendering requirements.
-- ESLint + TypeScript ESLint cover React best practices; run `yarn lint` before committing.
-- Prettier enforces formatting (`yarn format`).
-- CSS modules default to ASCII naming; comments are minimal and purposeful.
-- Islands should remain focused—avoid broad hydration when simple SSR suffices.
+- **TypeScript**: strict mode, SSR-friendly configuration in `tsconfig.json`.
+- **Linting**: ESLint (`yarn lint`) with React + TypeScript rules; fix before packaging.
+- **Formatting**: Prettier (`yarn format`) keeps code style consistent.
+- **CSS Modules**: prefer descriptive class names, keep comments minimal and purposeful.
+- **Client islands**: only hydrate when interactivity is required—SSR-first keeps the portal fast.
+- **Structured data**: components like JobPosting and Training emit JSON-LD; keep schema updates in sync with utility helpers.
 
 ## Deploying to Jahia
 
-1. Build and package the module:
+1. Build & package:
    ```bash
-   yarn build
+   yarn build && yarn package
    ```
-2. Upload `dist/package.tgz` to Jahia (via the Administration UI or CLI).
-3. Install and activate the module.
-4. Assign templates to channels/page types and add components through Content Editor.
+2. Upload `dist/package.tgz` to Jahia (Administration → Server settings → Modules) or via the Jahia CLI.
+3. Activate the module and assign templates to the desired channels/sites.
+4. Drop components from Content Editor or Page Builder to curate pages.
+5. For rapid iteration, script `yarn build && yarn jahia-deploy` or wire the watch task to auto-deploy after builds.
 
-For rapid iteration in a local Jahia environment, run `yarn watch` (alias of `yarn dev`) and configure `watch:callback` to package and deploy automatically once your local `jahia-deploy` is set up.
+## Extending the Portal
+
+- **Add a component**: scaffold a folder under `src/components`, create `default.server.tsx`, styles, CND, and localized resource entries. Follow existing patterns for list/full-page/CM views as needed.
+- **Introduce interactivity**: add `*.client.tsx` islands, import them from the SSR view via `AddResources` or `useEffect`.
+- **Expand translations**: update `settings/locales/*.json` for runtime strings and `settings/resources/*.properties` for authoring labels.
+- **Onboard new datasets**: mimic `hrMockData.json` when shipping additional mock services or sample data.
+- **CI/CD**: integrate `yarn build`, run lint/format, and push `dist/package.tgz` to artifact storage before deploying to Jahia environments.
+
+Have fun building! Contributions or internal customizations can follow the same module structure—just remember to keep component definitions, resource bundles, and SSR views in sync so editors receive a polished authoring experience.
