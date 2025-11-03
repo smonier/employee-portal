@@ -1,3 +1,5 @@
+import { buildNodeUrl } from "@jahia/javascript-modules-library";
+import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JobPostingProps } from "./types";
 
@@ -92,6 +94,56 @@ export const formatSalary = (props: JobPostingProps, locale: string) => {
   }
 
   return undefined;
+};
+
+export type ResolvedLink = {
+  href?: string;
+  target?: string;
+  rel?: string;
+};
+
+const buildInternalUrl = (value: JCRNodeWrapper | string | null | undefined) => {
+  if (!value) return undefined;
+  if (typeof value === "string") return value;
+  if (typeof value === "object" && "getPath" in value && typeof value.getPath === "function") {
+    return buildNodeUrl(value as JCRNodeWrapper);
+  }
+  return undefined;
+};
+
+export const resolveApplyLink = (props: JobPostingProps): ResolvedLink => {
+  const linkType = props["seu:linkType"];
+  const linkTarget =
+    props["seu:linkTarget"] && props["seu:linkTarget"] !== "_self"
+      ? props["seu:linkTarget"]
+      : undefined;
+  const directUrl = typeof props["jemp:applyUrl"] === "string" ? props["jemp:applyUrl"] : undefined;
+  const internalLink = props["seu:internalLink"];
+  const externalLink = props["seu:externalLink"];
+
+  let href: string | undefined;
+
+  if (linkType === "externalLink" && typeof externalLink === "string") {
+    href = externalLink;
+  } else if (linkType === "internalLink" && internalLink) {
+    href = buildInternalUrl(internalLink as JCRNodeWrapper | string | null);
+  } else if (linkType === "self") {
+    href = "#";
+  } else if (!linkType) {
+    // Legacy or fallback behaviour
+    href =
+      directUrl ||
+      buildInternalUrl(internalLink as JCRNodeWrapper | string | null) ||
+      (typeof externalLink === "string" ? externalLink : undefined);
+  }
+
+  if (!href) {
+    href = directUrl;
+  }
+
+  const rel = linkTarget === "_blank" ? "noopener noreferrer" : undefined;
+
+  return { href, target: linkTarget, rel };
 };
 
 const compactObject = (input: Record<string, unknown>): Record<string, unknown> => {

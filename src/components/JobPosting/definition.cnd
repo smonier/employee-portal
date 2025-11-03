@@ -1,4 +1,5 @@
-[ jempnt:jobPosting ] > jnt:content, jmix:editorialContent, mix:title, jempmix:component
+[ jempnt:jobPosting ] > jnt:content, jmix:editorialContent, jmix:mainResource, mix:title, jempmix:component, jempmix:queryContent, seumix:linkTo
+ - jcr:title (string) i18n
  - jemp:subtitle (string) i18n
  - jemp:summary (string) i18n
  - jemp:description (string) i18n
@@ -15,7 +16,6 @@
  - jemp:salaryCurrency (string)
  - jemp:salaryMin (string)
  - jemp:salaryMax (string)
- - jemp:applyUrl (string)
  - jemp:datePosted (date)
  - jemp:validThrough (date)
  - jemp:company (string) i18n

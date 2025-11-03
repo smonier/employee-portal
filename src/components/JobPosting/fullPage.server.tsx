@@ -3,7 +3,14 @@ import { t } from "i18next";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JobPostingProps } from "./types";
 import classes from "./fullPage.module.css";
-import { buildJobPostingJsonLd, formatDate, formatSalary, resolveLocale, toIsoDate } from "./utils";
+import {
+  buildJobPostingJsonLd,
+  formatDate,
+  formatSalary,
+  resolveApplyLink,
+  resolveLocale,
+  toIsoDate,
+} from "./utils";
 
 const formatLongDate = (value: string | undefined, locale: string) =>
   formatDate(value, locale, {
@@ -43,7 +50,8 @@ jahiaComponent(
     const experience = props["jemp:experienceLevel"];
     const companyName = props["jemp:company"];
     const companyUrl = props["jemp:companyUrl"];
-    const applyUrl = props["jemp:applyUrl"];
+    const applyLink = resolveApplyLink(props);
+    const applyUrl = applyLink.href;
     const salary = formatSalary(props, locale);
     const location = joinAddress(props);
     const postedShort = formatDate(props["jemp:datePosted"], locale);
@@ -158,7 +166,12 @@ jahiaComponent(
             )}
             <div className={classes.heroFooter}>
               {applyUrl && (
-                <a href={applyUrl} target="_blank" rel="noopener noreferrer" className={classes.ctaPrimary}>
+                <a
+                  href={applyUrl}
+                  target={applyLink.target}
+                  rel={applyLink.rel}
+                  className={classes.ctaPrimary}
+                >
                   {t("jobPosting.cta.apply", "Apply now")} →
                 </a>
               )}
@@ -290,7 +303,12 @@ jahiaComponent(
                   {applyUrl && (
                     <>
                       <div className={classes.divider} />
-                      <a href={applyUrl} target="_blank" rel="noopener noreferrer" className={classes.ctaPrimary}>
+                      <a
+                        href={applyUrl}
+                        target={applyLink.target}
+                        rel={applyLink.rel}
+                        className={classes.ctaPrimary}
+                      >
                         {t("jobPosting.section.apply", "Submit application")} →
                       </a>
                     </>

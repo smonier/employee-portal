@@ -3,7 +3,14 @@ import { t } from "i18next";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JobPostingProps } from "./types";
 import classes from "./component.module.css";
-import { buildJobPostingJsonLd, formatDate, formatSalary, resolveLocale, toIsoDate } from "./utils";
+import {
+  buildJobPostingJsonLd,
+  formatDate,
+  formatSalary,
+  resolveApplyLink,
+  resolveLocale,
+  toIsoDate,
+} from "./utils";
 
 type MetaEntry = { label: string; value?: string; itemProp?: string };
 
@@ -56,7 +63,8 @@ jahiaComponent(
   (rawProps: JobPostingProps, { renderContext }) => {
     const locale = resolveLocale(renderContext as RenderContext);
     const props = rawProps;
-    const applyUrl = props["jemp:applyUrl"];
+    const applyLink = resolveApplyLink(props);
+    const applyUrl = applyLink.href;
     const companyName = props["jemp:company"];
     const companyUrl = props["jemp:companyUrl"];
     const kicker =
@@ -108,7 +116,7 @@ jahiaComponent(
 
         <div className={classes.ctaRow}>
           {applyUrl && (
-            <a className={classes.primaryCta} href={applyUrl} target="_blank" rel="noopener noreferrer">
+            <a className={classes.primaryCta} href={applyUrl} target={applyLink.target} rel={applyLink.rel}>
               {t("jobPosting.cta.apply", "Apply now")}
             </a>
           )}

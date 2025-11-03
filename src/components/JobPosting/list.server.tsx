@@ -2,9 +2,9 @@ import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library"
 import { t } from "i18next";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { RenderContext } from "org.jahia.services.render";
-import classes from "./list.module.css";
 import type { JobPostingProps } from "./types";
-import { formatDate, formatSalary, resolveLocale } from "./utils";
+import classes from "./list.module.css";
+import { formatDate, formatSalary, resolveApplyLink, resolveLocale } from "./utils";
 
 const resolveDetailUrl = (
   node: JCRNodeWrapper | undefined,
@@ -36,9 +36,12 @@ jahiaComponent(
     const salary = formatSalary(props, locale);
     const experience = props["jemp:experienceLevel"];
     const postedDate = formatDate(props["jemp:datePosted"], locale);
-    const ctaUrl = props["jemp:applyUrl"];
+    const applyLink = resolveApplyLink(props);
+    const ctaUrl = applyLink.href;
     const detailUrl = resolveDetailUrl(currentNode as JCRNodeWrapper | undefined, ctaUrl);
     const viewDetailsLabel = t("jobPosting.cta.viewDetails", "View details");
+    const linkTarget = detailUrl && detailUrl === ctaUrl ? applyLink.target : undefined;
+    const linkRel = detailUrl && detailUrl === ctaUrl ? applyLink.rel : undefined;
 
     return (
       <article className={classes.item} itemScope itemType="https://schema.org/JobPosting">
@@ -53,8 +56,8 @@ jahiaComponent(
             <a
               className={classes.titleLink}
               href={detailUrl}
-              target={detailUrl === ctaUrl ? "_blank" : "_self"}
-              rel={detailUrl === ctaUrl ? "noopener noreferrer" : undefined}
+              target={linkTarget}
+              rel={linkRel}
             >
               {title}
             </a>
@@ -102,8 +105,8 @@ jahiaComponent(
             <a
               className={classes.link}
               href={detailUrl}
-              target={detailUrl === ctaUrl ? "_blank" : "_self"}
-              rel={detailUrl === ctaUrl ? "noopener noreferrer" : undefined}
+              target={linkTarget}
+              rel={linkRel}
             >
               {viewDetailsLabel} →
             </a>

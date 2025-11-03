@@ -24,6 +24,10 @@ export type JobPostingNode = JCRNodeWrapper & {
   "jemp:company"?: string;
   "jemp:companyUrl"?: string;
   "jemp:jobId"?: string;
+  "seu:linkType"?: string;
+  "seu:linkTarget"?: string;
+  "seu:externalLink"?: string;
+  "seu:internalLink"?: JCRNodeWrapper | string | null;
 };
 
 export type JobPostingProps = JobPostingNode;
