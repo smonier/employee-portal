@@ -77,11 +77,26 @@ const LoginClient = ({
     }
   };
 
-  const handleLoggedIn = () => {
+  const resolveRedirectUrl = (username?: string): string => {
+    const userKey = username?.toLowerCase();
+    switch (userKey) {
+      case "pam":
+      case "penny":
+        return "/sites/empportal/home/my-portal.html";
+      case "contrib-simple":
+      case "contrib-avance":
+        return "/start";
+      case "robin":
+      default:
+        return "/sites/empportal/home.html";
+    }
+  };
+
+  const handleLoggedIn = (username: string) => {
     setLoggedIn(true);
     setIsOpen(false);
     if (typeof window !== "undefined") {
-      window.location.href = '/sites/empportal/home/my-portal.html';
+      window.location.href = resolveRedirectUrl(username);
     }
   };
 

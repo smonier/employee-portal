@@ -10,7 +10,7 @@ import alert from "~/templates/css/alert.module.css";
 interface LoginFormClientProps {
   loginUrl: string;
   setUser: Dispatch<SetStateAction<string | undefined>>;
-  handleLoggedIn: () => void;
+  handleLoggedIn: (username: string) => void;
   isShowRememberMe: boolean;
   siteKey?: string;
   persona: LoginPersonaProps[];

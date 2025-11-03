@@ -40,7 +40,7 @@ export const login = async ({
     const value = await response.text();
     if (value === "OK") {
       setUser(username);
-      handleLoggedIn();
+      handleLoggedIn(username);
     } else if (value === "unauthorized") {
       setIncorrectLogin(true);
     } else {
