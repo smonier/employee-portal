@@ -2,6 +2,7 @@ import { jahiaComponent } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { Props } from "./types.js";
 import classes from "./component.module.css";
+import { resolveLink } from "~/utils/linkTo";
 
 const formatDateTime = (value?: string) => {
   if (!value) return null;
@@ -21,6 +22,10 @@ jahiaComponent(
     const props = rawProps as Props;
     const start = formatDateTime(props["jemp:start"]);
     const end = formatDateTime(props["jemp:end"]);
+    const onlineLink = resolveLink(props);
+    const onlineUrl = onlineLink.href;
+    const onlineTarget = onlineLink.target ?? "_self";
+    const onlineRel = onlineLink.rel ?? (onlineTarget === "_blank" ? "noopener noreferrer" : undefined);
 
     return (
       <article className={classes.card}>
@@ -45,10 +50,10 @@ jahiaComponent(
             )}
           </div>
         )}
-        {(props["jemp:onlineUrl"] || props["jemp:requiresRSVP"]) && (
+        {(onlineUrl || props["jemp:requiresRSVP"]) && (
           <div className={classes.actions}>
-            {props["jemp:onlineUrl"] && (
-              <a className={classes.link} href={props["jemp:onlineUrl"]}>
+            {onlineUrl && (
+              <a className={classes.link} href={onlineUrl} target={onlineTarget} rel={onlineRel}>
                 {t("jemp.label.joinOnline")}
               </a>
             )}

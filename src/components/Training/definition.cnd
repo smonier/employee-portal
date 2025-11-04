@@ -1,4 +1,4 @@
-[ jempnt:training ] > jnt:content, mix:title, jmix:editorialContent, jmix:mainResource, jempmix:component, jempmix:queryContent
+[ jempnt:training ] > jnt:content, mix:title, jmix:editorialContent, jmix:mainResource, jempmix:component, jempmix:queryContent, seumix:linkTo
  - jemp:summary (string) i18n
  - jemp:description (string, richtext) i18n
  - jemp:startDate (date)
@@ -11,6 +11,5 @@
  - jemp:skillLevel (string)
  - jemp:audience (string) i18n
  - jemp:format (string)
- - jemp:ctaUrl (string)
  - jemp:cost (string)
  - jemp:heroImage (weakreference, picker[type='image']) < 'jmix:image'

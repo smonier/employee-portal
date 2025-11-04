@@ -4,6 +4,7 @@ import type { TrainingProps } from "./types";
 import { t } from "i18next";
 import type { RenderContext } from "org.jahia.services.render";
 import { buildJsonLd, formatDateTime, resolveImageUrl, resolveLocale } from "./utils";
+import { resolveLink } from "~/utils/linkTo";
 
 const metaEntries = (
   props: TrainingProps,
@@ -41,7 +42,10 @@ jahiaComponent(
     const description = props["jemp:description"];
     const providerName = props["jemp:providerName"];
     const providerUrl = props["jemp:providerUrl"];
-    const ctaUrl = props["jemp:ctaUrl"] || providerUrl;
+    const registrationLink = resolveLink(props, providerUrl);
+    const ctaUrl = registrationLink.href;
+    const ctaTarget = registrationLink.target ?? "_self";
+    const ctaRel = registrationLink.rel ?? (ctaTarget === "_blank" ? "noopener noreferrer" : undefined);
     const imageUrl = resolveImageUrl(props["jemp:heroImage"], renderContext as RenderContext);
     const meta = metaEntries(props, locale);
     const jsonLd = buildJsonLd(props, locale, ctaUrl, imageUrl);
@@ -86,7 +90,7 @@ jahiaComponent(
 
         <div className={classes.ctaRow}>
           {ctaUrl && (
-            <a className={classes.cta} href={ctaUrl} target="_blank" rel="noopener noreferrer">
+            <a className={classes.cta} href={ctaUrl} target={ctaTarget} rel={ctaRel}>
               {registerLabel}
             </a>
           )}

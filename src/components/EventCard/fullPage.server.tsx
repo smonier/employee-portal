@@ -2,6 +2,7 @@ import { jahiaComponent } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { Props } from "./types.js";
 import classes from "./fullPage.module.css";
+import { resolveLink } from "~/utils/linkTo";
 
 jahiaComponent(
   {
@@ -17,7 +18,10 @@ jahiaComponent(
     const startDate = props["jemp:start"];
     const endDate = props["jemp:end"];
     const location = props["jemp:location"];
-    const onlineUrl = props["jemp:onlineUrl"];
+    const onlineLink = resolveLink(props);
+    const onlineUrl = onlineLink.href;
+    const onlineTarget = onlineLink.target ?? "_blank";
+    const onlineRel = onlineLink.rel ?? (onlineTarget === "_blank" ? "noopener noreferrer" : undefined);
     const requiresRSVP = props["jemp:requiresRSVP"];
 
     const formatDateTime = (dateStr?: string) => {
@@ -152,12 +156,7 @@ jahiaComponent(
                             </svg>
                             {t("jemp.label.onlineEvent")}
                           </div>
-                          <a
-                            href={onlineUrl}
-                            className={classes.joinLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={onlineUrl} className={classes.joinLink} target={onlineTarget} rel={onlineRel}>
                             {t("jemp.label.joinOnlineMeeting")} →
                           </a>
                         </div>

@@ -1,9 +1,8 @@
-[ jempnt:event ] > jnt:content, jmix:editorialContent, jmix:mainResource, jempmix:component, jempmix:queryContent
+[ jempnt:event ] > jnt:content, jmix:editorialContent, jmix:mainResource, jempmix:component, jempmix:queryContent, seumix:linkTo
  - jcr:title (string) i18n
  - jemp:summary (string) i18n
  - jemp:start (date)
  - jemp:end (date)
  - jemp:location (string) i18n
- - jemp:onlineUrl (string)
  - jemp:requiresRSVP (boolean)
  - jemp:heroImage (weakreference, picker[type='image']) < 'jmix:image'

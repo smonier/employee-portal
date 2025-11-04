@@ -5,6 +5,7 @@ import { t } from "i18next";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { formatDateTime, resolveLocale } from "./utils";
+import { resolveLink } from "~/utils/linkTo";
 
 const resolveDetailUrl = (
   node: JCRNodeWrapper | undefined,
@@ -32,8 +33,16 @@ jahiaComponent(
     const provider = props["jemp:providerName"];
     const delivery = props["jemp:deliveryMode"];
     const startDate = formatDateTime(props["jemp:startDate"], locale);
-    const ctaUrl = props["jemp:ctaUrl"] || props["jemp:providerUrl"];
+    const registrationLink = resolveLink(props, props["jemp:providerUrl"]);
+    const ctaUrl = registrationLink.href;
     const detailUrl = resolveDetailUrl(currentNode as JCRNodeWrapper | undefined, ctaUrl);
+    const isDirectRegistrationLink = Boolean(detailUrl && ctaUrl && detailUrl === ctaUrl);
+    const anchorTarget = isDirectRegistrationLink
+      ? registrationLink.target ?? "_blank"
+      : "_self";
+    const anchorRel =
+      (isDirectRegistrationLink ? registrationLink.rel : undefined) ??
+      (anchorTarget === "_blank" ? "noopener noreferrer" : undefined);
     const viewDetailsLabel = t("training.cta.viewDetails", "View details");
 
     return (
@@ -46,12 +55,7 @@ jahiaComponent(
 
         <h3 className={classes.title} itemProp="name">
           {detailUrl ? (
-            <a
-              className={classes.titleLink}
-              href={detailUrl}
-              target={detailUrl === ctaUrl ? "_blank" : "_self"}
-              rel={detailUrl === ctaUrl ? "noopener noreferrer" : undefined}
-            >
+            <a className={classes.titleLink} href={detailUrl} target={anchorTarget} rel={anchorRel}>
               {title}
             </a>
           ) : (
@@ -68,12 +72,7 @@ jahiaComponent(
         <div className={classes.footer}>
           {provider && <span className={classes.provider}>{provider}</span>}
           {detailUrl && (
-            <a
-              className={classes.link}
-              href={detailUrl}
-              target={detailUrl === ctaUrl ? "_blank" : "_self"}
-              rel={detailUrl === ctaUrl ? "noopener noreferrer" : undefined}
-            >
+            <a className={classes.link} href={detailUrl} target={anchorTarget} rel={anchorRel}>
               {viewDetailsLabel} →
             </a>
           )}

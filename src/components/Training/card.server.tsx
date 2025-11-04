@@ -5,6 +5,7 @@ import { t } from "i18next";
 import type { RenderContext } from "org.jahia.services.render";
 import { formatDateTime, resolveImageUrl, resolveLocale } from "./utils";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
+import { resolveLink } from "~/utils/linkTo";
 
 jahiaComponent(
   {
@@ -20,7 +21,8 @@ jahiaComponent(
     const title = props["jcr:title"];
     const summary = props["jemp:summary"];
     const provider = props["jemp:providerName"];
-    const ctaUrl = props["jemp:ctaUrl"] || props["jemp:providerUrl"];
+    const registrationLink = resolveLink(props, props["jemp:providerUrl"]);
+    const ctaUrl = registrationLink.href;
     const detailUrl =
       (currentNode as JCRNodeWrapper | undefined)?.getPath instanceof Function
         ? buildNodeUrl(currentNode as JCRNodeWrapper)
@@ -57,14 +59,22 @@ jahiaComponent(
       </>
     );
 
+    const isDirectRegistrationLink = Boolean(detailUrl && ctaUrl && detailUrl === ctaUrl);
+    const anchorTarget = isDirectRegistrationLink
+      ? registrationLink.target ?? "_blank"
+      : "_self";
+    const anchorRel =
+      (isDirectRegistrationLink ? registrationLink.rel : undefined) ??
+      (anchorTarget === "_blank" ? "noopener noreferrer" : undefined);
+
     return (
       <article className={classes.card} itemScope itemType="https://schema.org/TrainingEvent">
         {detailUrl ? (
           <a
             className={classes.link}
             href={detailUrl}
-            target={detailUrl === ctaUrl ? "_blank" : "_self"}
-            rel={detailUrl === ctaUrl ? "noopener noreferrer" : undefined}
+            target={anchorTarget}
+            rel={anchorRel}
           >
             {content}
           </a>

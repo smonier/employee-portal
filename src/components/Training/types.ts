@@ -15,9 +15,12 @@ export type TrainingProps = {
   "jemp:skillLevel"?: string;
   "jemp:audience"?: string;
   "jemp:format"?: string;
-  "jemp:ctaUrl"?: string;
   "jemp:cost"?: string;
   "jemp:heroImage"?: JCRNodeWrapper | string | null;
+  "seu:linkType"?: string;
+  "seu:linkTarget"?: string;
+  "seu:externalLink"?: string;
+  "seu:internalLink"?: JCRNodeWrapper | string | null;
   [key: string]: unknown;
 };
 

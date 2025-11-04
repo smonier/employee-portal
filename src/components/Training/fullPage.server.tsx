@@ -4,6 +4,7 @@ import type { TrainingProps } from "./types";
 import { t } from "i18next";
 import type { RenderContext } from "org.jahia.services.render";
 import { buildJsonLd, formatDateTime, resolveImageUrl, resolveLocale } from "./utils";
+import { resolveLink } from "~/utils/linkTo";
 
 jahiaComponent(
   {
@@ -21,7 +22,10 @@ jahiaComponent(
     const description = props["jemp:description"];
     const providerName = props["jemp:providerName"];
     const providerUrl = props["jemp:providerUrl"];
-    const ctaUrl = props["jemp:ctaUrl"] || providerUrl;
+    const registrationLink = resolveLink(props, providerUrl);
+    const ctaUrl = registrationLink.href;
+    const ctaTarget = registrationLink.target ?? "_self";
+    const ctaRel = registrationLink.rel ?? (ctaTarget === "_blank" ? "noopener noreferrer" : undefined);
     const imageUrl = resolveImageUrl(props["jemp:heroImage"], renderContext as RenderContext);
     const jsonLd = buildJsonLd(props, locale, ctaUrl, imageUrl);
     const schedule = [
@@ -89,7 +93,7 @@ jahiaComponent(
             )}
             <div className={classes.ctaRow}>
               {ctaUrl && (
-                <a href={ctaUrl} target="_blank" rel="noopener noreferrer" className={classes.primaryCta}>
+                <a href={ctaUrl} target={ctaTarget} rel={ctaRel} className={classes.primaryCta}>
                   {t("training.cta.register", "Register now")} →
                 </a>
               )}
@@ -167,7 +171,7 @@ jahiaComponent(
                 )}
 
                 {ctaUrl && (
-                  <a href={ctaUrl} target="_blank" rel="noopener noreferrer" className={classes.secondaryCta}>
+                  <a href={ctaUrl} target={ctaTarget} rel={ctaRel} className={classes.secondaryCta}>
                     {t("training.cta.register", "Register now")} →
                   </a>
                 )}
